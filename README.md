@@ -7,11 +7,12 @@ Realtime chat application with Firebase => Features:
 # Simple Messages
 # Attachment
 # File
-<ol>
-  <li>Coffee</li>
-  <li>Tea</li>
-  <li>Milk</li>
-</ol>
+<dl>
+  <dt>Coffee</dt>
+  <dd>- black hot drink</dd>
+  <dt>Milk</dt>
+  <dd>- white cold drink</dd>
+</dl>
 # Firebase Realtime Database
 # Firebase Storage
 # Firebase Email/Password Authentication
