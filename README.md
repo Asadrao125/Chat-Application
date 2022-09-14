@@ -11,7 +11,7 @@ Realtime chat application with Firebase.
 # \nFirebase Realtime Database
 # \nFirebase Storage
 # \nFirebase Email/Password Authentication
-# \nUser Online/Offline Status
+# /nUser Online/Offline Status
 # \nCustom Notifications, Different for simple message and Attachment
 <img src=https://user-images.githubusercontent.com/37478549/190132776-ab867617-6508-4efc-84bc-7af4744205b3.jpg width="400" height="150" />
 <img src=https://user-images.githubusercontent.com/37478549/190132782-ded33ce3-eb5d-4f69-a798-53282985f7b0.jpg width="400" height="150" />
