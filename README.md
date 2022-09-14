@@ -1,5 +1,5 @@
 # Chat-Application
-Realtime chat application with Firebase.
+Realtime chat application with Firebase
 => Features:
 # Login
 <img src = https://user-images.githubusercontent.com/37478549/190108959-2dd49a8b-4384-4324-beba-5c7fbb8754ab.png width="200" height="350" />
