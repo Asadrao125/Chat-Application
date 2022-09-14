@@ -1,8 +1,8 @@
 # Chat-Application
 Realtime chat application with Firebase.
 => Features:
-# Login <img src = https://user-images.githubusercontent.com/37478549/190108959-2dd49a8b-4384-4324-beba-5c7fbb8754ab.png />
-# Signup <img src=https://user-images.githubusercontent.com/37478549/190109024-1678a376-2b66-432e-9b8a-01c304e2800c.png />
+# Login <img src = https://user-images.githubusercontent.com/37478549/190108959-2dd49a8b-4384-4324-beba-5c7fbb8754ab.png width="200" height="200" />
+# Signup <img src=https://user-images.githubusercontent.com/37478549/190109024-1678a376-2b66-432e-9b8a-01c304e2800c.png width="200" height="200" />
 # Simple Messages
 # Attachment
 # File
