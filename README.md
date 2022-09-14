@@ -22,7 +22,7 @@
 <dl>
   <dd>User Online/Offline Status</dd>
 </dl>
-<img src=https://user-images.githubusercontent.com/37478549/190136278-44a17aee-91a1-4a57-8d3a-85a5baefa16d.jpg width="400" height="150" />
+<img src=https://user-images.githubusercontent.com/37478549/190136278-44a17aee-91a1-4a57-8d3a-85a5baefa16d.jpg width="400" height="100" />
 <dl>
   <dd>Custom Notifications, Different for simple message and Attachment</dd>
   <dd>Firebase Realtime Database</dd>
