@@ -1,6 +1,6 @@
 # Chat-Application with Firebase
-<dl>
-  <dd "style=font-weight=bold">Login</dd>
+<dl "style=font-weight=bold">
+  <dd>Login</dd>
 </dl>
 <img src = https://user-images.githubusercontent.com/37478549/190108959-2dd49a8b-4384-4324-beba-5c7fbb8754ab.png width="200" height="350" />
 <dl>
