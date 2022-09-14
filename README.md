@@ -12,8 +12,8 @@ Realtime chat application with Firebase => Features:
 <img src=https://user-images.githubusercontent.com/37478549/190132786-c8023dbf-6a44-4483-b1f4-be7d01ae9f79.jpg width="400" height="250" />
 # User Online/Offline Status
 <img src=https://user-images.githubusercontent.com/37478549/190136278-44a17aee-91a1-4a57-8d3a-85a5baefa16d.jpg width="400" height="150" />
-# Custom Notifications, Different for simple message and Attachment
 <dl>
+  <dt>Custom Notifications, Different for simple message and Attachment</dt>
   <dt>Firebase Realtime Database</dt>
   <dt>Firebase Storage</dt>
   <dt>Firebase Email/Password Authentication</dt>
