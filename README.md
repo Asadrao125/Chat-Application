@@ -4,8 +4,9 @@ Realtime chat application with Firebase => Features:
 <img src = https://user-images.githubusercontent.com/37478549/190108959-2dd49a8b-4384-4324-beba-5c7fbb8754ab.png width="200" height="350" />
 # Signup
 <img src=https://user-images.githubusercontent.com/37478549/190109024-1678a376-2b66-432e-9b8a-01c304e2800c.png width="200" height="350" />
+# Simple Message
+<img src=https://user-images.githubusercontent.com/37478549/190132776-ab867617-6508-4efc-84bc-7af4744205b3.jpg width="400" height="150" />
 <dl>
-  <dt>Simple Messages</dt>
   <dt>Attachment</dt>
   <dt>File</dt>
   <dt>Firebase Realtime Database</dt>
