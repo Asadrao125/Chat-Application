@@ -1,5 +1,4 @@
-<h>Chat-Application</h>
-Realtime chat application with Firebase => Features:
+# Chat-Application with Firebase
 <dl>
   <dt>Login</dt>
 </dl>
