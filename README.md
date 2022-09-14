@@ -9,7 +9,7 @@ Realtime chat application with Firebase => Features:
 # File
 <img src=https://user-images.githubusercontent.com/37478549/190132776-ab867617-6508-4efc-84bc-7af4744205b3.jpg width="400" height="150" />
 # Attachment
-<img src=https://user-images.githubusercontent.com/37478549/190132786-c8023dbf-6a44-4483-b1f4-be7d01ae9f79.jpg width="400" height="150" />
+<img src=https://user-images.githubusercontent.com/37478549/190132786-c8023dbf-6a44-4483-b1f4-be7d01ae9f79.jpg width="400" height="250" />
 <dl>
   <dt>Firebase Realtime Database</dt>
   <dt>Firebase Storage</dt>
