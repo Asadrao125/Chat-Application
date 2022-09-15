@@ -102,6 +102,7 @@ class UserAdapter(var context: Home, var list: ArrayList<UserModel>, var usernam
                         } else {
                             holder.imgSeen.setImageResource(R.drawable.ic_delivered)
                         }
+
                     }
                 }
             }
