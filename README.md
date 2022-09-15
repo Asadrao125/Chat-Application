@@ -1,6 +1,6 @@
 # Chat-Application with Firebase
 <dl>
-  <dd>*Realtime Database*</dd>
+  <dd><b>Realtime Database</b></dd>
   <dd>Firebase Storage</dd>
   <dd>Firebase Email/Password Authentication</dd>
 </dl>
