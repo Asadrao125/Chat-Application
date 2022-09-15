@@ -60,7 +60,7 @@ class ChatAdapter(var context: Chat, var list: ArrayList<ChatModel>, var usernam
             holder.tvMessage.visibility = View.VISIBLE
         }
 
-        if (chatModel.seen.equals("true")) {
+        if (chatModel.messageStatus.equals("Seen")) {
             holder.imgSeen.setImageResource(R.drawable.ic_seen)
         } else {
             holder.imgSeen.setImageResource(R.drawable.ic_delivered)
