@@ -1,5 +1,11 @@
 # Chat-Application with Firebase
 <dl>
+  <dd>It's all about:</dd>
+  <dd>Firebase Realtime Database</dd>
+  <dd>Firebase Storage</dd>
+  <dd>Firebase Email/Password Authentication</dd>
+</dl>
+<dl>
   <dd>Login</dd>
 </dl>
 <img src = https://user-images.githubusercontent.com/37478549/190108959-2dd49a8b-4384-4324-beba-5c7fbb8754ab.png width="200" height="350" />
@@ -24,8 +30,3 @@
   <dd>User Online/Offline Status</dd>
 </dl>
 <img src=https://user-images.githubusercontent.com/37478549/190136278-44a17aee-91a1-4a57-8d3a-85a5baefa16d.jpg width="400" height="150" />
-<dl>
-  <dd>Firebase Realtime Database</dd>
-  <dd>Firebase Storage</dd>
-  <dd>Firebase Email/Password Authentication</dd>
-</dl>
