@@ -8,6 +8,7 @@
 </dl>
 <img src=https://user-images.githubusercontent.com/37478549/190109024-1678a376-2b66-432e-9b8a-01c304e2800c.png width="200" height="350" />
 <dl>
+  <dd>Custom Notifications, Different for simple message and Attachment</dd>
   <dd>Simple Message</dd>
 </dl>
 <img src=https://user-images.githubusercontent.com/37478549/190132782-ded33ce3-eb5d-4f69-a798-53282985f7b0.jpg width="400" height="100" />
@@ -24,7 +25,6 @@
 </dl>
 <img src=https://user-images.githubusercontent.com/37478549/190136278-44a17aee-91a1-4a57-8d3a-85a5baefa16d.jpg width="400" height="150" />
 <dl>
-  <dd>Custom Notifications, Different for simple message and Attachment</dd>
   <dd>Firebase Realtime Database</dd>
   <dd>Firebase Storage</dd>
   <dd>Firebase Email/Password Authentication</dd>
