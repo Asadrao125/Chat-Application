@@ -12,5 +12,6 @@ class ChatModel(
     // 1 for Simple Send
     // 2 for send and delivered
     // 3 for blue tick
-    var messageStatus: Int = 0
+    var messageStatus: Int = 0,
+    var seen: String = ""
 )

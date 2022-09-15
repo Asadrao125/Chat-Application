@@ -17,8 +17,8 @@ import com.rengwuxian.materialedittext.MaterialEditText
 class Login : AppCompatActivity() {
     var etEmail: MaterialEditText? = null
     var etPassword: MaterialEditText? = null
-    var btnLogin: Button? = null
     var layoutCreateAccount: LinearLayout? = null
+    var btnLogin: Button? = null
     var mAuth: FirebaseAuth? = null
     var customProgressDialog: Dialog_CustomProgress? = null
 
@@ -29,8 +29,8 @@ class Login : AppCompatActivity() {
 
         etEmail = findViewById(R.id.etEmail)
         etPassword = findViewById(R.id.etPassword)
-        btnLogin = findViewById(R.id.btnLogin)
         layoutCreateAccount = findViewById(R.id.layoutCreateAccount)
+        btnLogin = findViewById(R.id.btnLogin)
         mAuth = FirebaseAuth.getInstance()
         customProgressDialog = Dialog_CustomProgress(this)
 
@@ -52,7 +52,7 @@ class Login : AppCompatActivity() {
         }
 
         layoutCreateAccount?.setOnClickListener {
-            val intent = Intent(this, Register::class.java)
+            val intent = Intent(this@Login, Register::class.java)
             startActivity(intent)
         }
     }

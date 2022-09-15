@@ -25,22 +25,28 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
 
         params = remoteMessage.data
 
-        val body: String = remoteMessage.notification?.body!!
-        val title: String = remoteMessage.notification?.title!!
-
         if (params!!.size != 0) {
+            val title = params!!.get("title")
+            val body = params!!.get("body")
             val senderId = params!!.get("senderId")
             val recieverId = params!!.get("recieverId")
             val profilePicUrl = params!!.get("profilePicUrl")
             val messageType = params!!.get("messageType")
+            val fileUrl = params!!.get("fileUrl")
 
             if (messageType.equals("1")) {
-                showNotificationSimple(title, body, profilePicUrl!!)
+                showNotificationSimple(title!!, body!!, profilePicUrl!!)
             } else if (messageType.equals("2")) {
                 val imageUrl = params!!.get("imageUrl")
-                showNotificationWithAttachment(title, body, profilePicUrl!!, imageUrl!!)
+                showNotificationWithAttachment(title!!, body!!, profilePicUrl!!, imageUrl!!)
             } else if (messageType.equals("3")) {
-                showNotificationSimple(title, body, profilePicUrl!!)
+                if (fileUrl!!.contains("jpg") || fileUrl.contains("png")
+                    || fileUrl.contains("jpeg")
+                ) {
+                    showNotificationWithAttachment(title!!, body!!, profilePicUrl!!, fileUrl)
+                } else {
+                    showNotificationSimple(title!!, body!!, profilePicUrl!!)
+                }
             }
         }
     }

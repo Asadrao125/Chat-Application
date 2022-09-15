@@ -36,7 +36,7 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cv"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="100dp"
             android:layout_gravity="end"
             android:layout_marginTop="10dp"
@@ -44,7 +44,7 @@
 
             <ImageView
                 android:id="@+id/imageViewChat"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="100dp"
                 android:scaleType="centerCrop"
                 android:src="@drawable/ic_user"
@@ -80,15 +80,30 @@
 
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/tvTime"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:layout_marginTop="5dp"
-            android:padding="5dp"
-            android:text="5:00 PM"
-            android:textColor="@android:color/darker_gray" />
+            android:gravity="end"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tvTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:gravity="center"
+                android:padding="5dp"
+                android:text="5:00 PM"
+                android:textColor="@android:color/darker_gray" />
+
+            <ImageView
+                android:id="@+id/imgSeen"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_delivered" />
+
+        </LinearLayout>
 
     </LinearLayout>
 

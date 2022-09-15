@@ -1,5 +1,6 @@
 package com.asad.chatapplication.adapters
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.net.Uri
 import android.view.LayoutInflater
@@ -17,7 +18,7 @@ import com.asad.chatapplication.R
 import com.asad.chatapplication.activities.Chat
 import com.asad.chatapplication.activities.ViewImage
 import com.asad.chatapplication.models.ChatModel
-import com.asad.chatapplication.utils.StaticFunctions
+import com.asad.chatapplication.utils.StaticFunctions.Companion.OpenFile
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.squareup.picasso.Picasso
@@ -38,6 +39,7 @@ class ChatAdapter(var context: Chat, var list: ArrayList<ChatModel>, var usernam
         return MyViewHolder(view)
     }
 
+    @SuppressLint("ResourceAsColor")
     override fun onBindViewHolder(@NonNull holder: MyViewHolder, position: Int) {
         val chatModel: ChatModel = list.get(position)
         holder.tvMessage.text = chatModel.message
@@ -58,10 +60,26 @@ class ChatAdapter(var context: Chat, var list: ArrayList<ChatModel>, var usernam
             holder.tvMessage.visibility = View.VISIBLE
         }
 
+        if (chatModel.seen.equals("true")) {
+            holder.imgSeen.setImageResource(R.drawable.ic_seen)
+        } else {
+            holder.imgSeen.setImageResource(R.drawable.ic_delivered)
+        }
+
         if (!chatModel.fileUrl.isEmpty()) {
-            holder.fileLayout?.visibility = View.VISIBLE
-            holder.tvFileTextView?.visibility = View.VISIBLE
-            setFileText(chatModel.fileUrl, holder)
+            if (chatModel.fileUrl.contains("jpg") || chatModel.fileUrl.contains("png")
+                || chatModel.fileUrl.contains("jpeg")
+            ) {
+                Picasso.get().load(chatModel.fileUrl).placeholder(R.drawable.ic_gallery)
+                    .into(holder.imageViewChat)
+                holder.cv.visibility = View.VISIBLE
+                holder.fileLayout?.visibility = View.GONE
+            } else {
+                holder.cv.visibility = View.GONE
+                holder.fileLayout?.visibility = View.VISIBLE
+                holder.tvFileTextView?.visibility = View.VISIBLE
+                setFileText(chatModel.fileUrl, holder)
+            }
         } else {
             holder.fileLayout?.visibility = View.GONE
             holder.tvFileTextView?.visibility = View.GONE
@@ -77,10 +95,22 @@ class ChatAdapter(var context: Chat, var list: ArrayList<ChatModel>, var usernam
                 val options =
                     ActivityOptionsCompat.makeSceneTransitionAnimation(context, transition)
                 context.startActivity(intent, options.toBundle())
-
             } else if (!chatModel.fileUrl.isEmpty()) {
-                val uri: Uri = Uri.parse(chatModel.fileUrl)
-                StaticFunctions.OpenFile(chatModel.fileUrl, uri, context)
+                if (chatModel.fileUrl.contains("jpg") || chatModel.fileUrl.contains("png")
+                    || chatModel.fileUrl.contains("jpeg")
+                ) {
+                    val intent = Intent(context, ViewImage::class.java)
+                    intent.putExtra("imageUrl", chatModel.fileUrl)
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                    val transition =
+                        Pair.create<View?, String?>(holder.imageViewChat, "transition")
+                    val options =
+                        ActivityOptionsCompat.makeSceneTransitionAnimation(context, transition)
+                    context.startActivity(intent, options.toBundle())
+                } else {
+                    val uri: Uri = Uri.parse(chatModel.fileUrl)
+                    OpenFile(chatModel.fileUrl, uri, context)
+                }
             }
         }
     }
@@ -121,6 +151,7 @@ class ChatAdapter(var context: Chat, var list: ArrayList<ChatModel>, var usernam
         var imageViewChat: ImageView
         var imageFileType: ImageView
         var cv: CardView
+        var imgSeen: ImageView
 
         init {
             tvMessage = itemView.findViewById(R.id.tvMessage)
@@ -131,6 +162,7 @@ class ChatAdapter(var context: Chat, var list: ArrayList<ChatModel>, var usernam
             cv = itemView.findViewById(R.id.cv)
             fileLayout = itemView.findViewById(R.id.fileLayout)
             tvFileTextView = itemView.findViewById(R.id.tvFileTextView)
+            imgSeen = itemView.findViewById(R.id.imgSeen)
         }
     }
 
