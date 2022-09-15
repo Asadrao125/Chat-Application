@@ -1,6 +1,6 @@
 # Chat-Application with Firebase
 <dl>
-  <dd><b>***** Features *****</b></dd>
+  <dd><b>********** Features **********</b></dd>
   <dd><b>=> Realtime Database</b></dd>
   <dd><b>=> Firebase Storage</b></dd>
   <dd><b>=> Firebase Email/Password Authentication</b></dd>
