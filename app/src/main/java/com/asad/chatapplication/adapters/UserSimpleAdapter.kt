@@ -23,8 +23,8 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import com.squareup.picasso.Picasso
 
-class UserAdapter(var context: Home, var list: ArrayList<UserModel>, var username: String) :
-    RecyclerView.Adapter<UserAdapter.MyViewHolder>() {
+class UserSimpleAdapter(var context: Home, var list: ArrayList<UserModel>, var username: String) :
+    RecyclerView.Adapter<UserSimpleAdapter.MyViewHolder>() {
     val firebaseUser = FirebaseAuth.getInstance().currentUser
 
     override fun onCreateViewHolder(
@@ -32,7 +32,7 @@ class UserAdapter(var context: Home, var list: ArrayList<UserModel>, var usernam
         viewType: Int
     ): MyViewHolder {
         val view: View =
-            LayoutInflater.from(context).inflate(R.layout.item_user, parent, false)
+            LayoutInflater.from(context).inflate(R.layout.item_user_simple, parent, false)
         return MyViewHolder(view)
     }
 
@@ -73,47 +73,6 @@ class UserAdapter(var context: Home, var list: ArrayList<UserModel>, var usernam
         }
 
         checkUserStatus(userModel.id, holder)
-        lastMessage(userModel.id, holder)
-    }
-
-    private fun lastMessage(userId: String, holder: MyViewHolder) {
-        val chatRefrence = FirebaseDatabase.getInstance().getReference().child("Chats")
-        val fuser = FirebaseAuth.getInstance().currentUser
-        chatRefrence.addValueEventListener(object : ValueEventListener {
-            override fun onDataChange(@NonNull dataSnapshot: DataSnapshot) {
-                var unreadCount = 0
-                for (snapshot in dataSnapshot.children) {
-                    val chat = snapshot.getValue(ChatModel::class.java)
-                    if (chat!!.recieverId.equals(fuser?.uid) && chat.senderId.equals(userId) ||
-                        chat.recieverId.equals(userId) && chat.senderId.equals(fuser?.uid)
-                    ) {
-                        holder.tvLastMessage.text = chat.message
-
-                        if (chat.recieverId.equals(fuser?.uid)) {
-                            if (chat.messageStatus.equals("Seen")) {
-                                holder.tvLastMessage.setTypeface(null, Typeface.NORMAL)
-                                holder.imgUnreadMessage.visibility = View.GONE
-                                holder.tvMessageCount.visibility = View.GONE
-                            } else {
-                                unreadCount++
-                                holder.tvMessageCount.text = unreadCount.toString()
-                                holder.imgUnreadMessage.visibility = View.VISIBLE
-                                holder.tvMessageCount.visibility = View.VISIBLE
-                                holder.tvLastMessage.setTypeface(null, Typeface.BOLD)
-                            }
-                        }
-
-                        if (chat.messageStatus.equals("Seen")) {
-                            holder.imgSeen.setImageResource(R.drawable.ic_seen)
-                        } else {
-                            holder.imgSeen.setImageResource(R.drawable.ic_delivered)
-                        }
-                    }
-                }
-            }
-
-            override fun onCancelled(@NonNull databaseError: DatabaseError) {}
-        })
     }
 
     private fun checkUserStatus(id: String, holder: MyViewHolder) {
@@ -142,23 +101,13 @@ class UserAdapter(var context: Home, var list: ArrayList<UserModel>, var usernam
 
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var tvUserName: TextView
-        var tvLastMessage: TextView
         var profilePic: ImageView
         var imgOnline: ImageView
-        var imgSeen: ImageView
-        var imgUnreadMessage: ImageView
-        var tvMessageCount: TextView
-        var unreadLayout: RelativeLayout
 
         init {
             tvUserName = itemView.findViewById(R.id.tvUserName)
-            tvLastMessage = itemView.findViewById(R.id.tvLastMessage)
             profilePic = itemView.findViewById(R.id.profilePic)
             imgOnline = itemView.findViewById(R.id.imgOnline)
-            imgSeen = itemView.findViewById(R.id.imgSeen)
-            imgUnreadMessage = itemView.findViewById(R.id.imgUnreadMessage)
-            tvMessageCount = itemView.findViewById(R.id.tvMessageCount)
-            unreadLayout = itemView.findViewById(R.id.unreadLayout)
         }
     }
 }

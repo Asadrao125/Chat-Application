@@ -23,7 +23,12 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.squareup.picasso.Picasso
 
-class ChatAdapter(var context: Chat, var list: ArrayList<ChatModel>, var username: String) :
+class ChatAdapter(
+    var context: Chat,
+    var list: ArrayList<ChatModel>,
+    var username: String,
+    var profilePicUrl: String
+) :
     RecyclerView.Adapter<ChatAdapter.MyViewHolder>() {
     val MSG_TYPE_LEFT: Int = 0
     val MSG_TYPE_RIGHT: Int = 1
@@ -53,6 +58,8 @@ class ChatAdapter(var context: Chat, var list: ArrayList<ChatModel>, var usernam
                 .into(holder.imageViewChat)
             holder.cv.visibility = View.VISIBLE
         }
+
+        Picasso.get().load(profilePicUrl).placeholder(R.drawable.ic_gallery).into(holder.imgProfile)
 
         if (chatModel.message.isEmpty()) {
             holder.tvMessage.visibility = View.GONE
@@ -152,6 +159,7 @@ class ChatAdapter(var context: Chat, var list: ArrayList<ChatModel>, var usernam
         var imageFileType: ImageView
         var cv: CardView
         var imgSeen: ImageView
+        var imgProfile: ImageView
 
         init {
             tvMessage = itemView.findViewById(R.id.tvMessage)
@@ -163,6 +171,7 @@ class ChatAdapter(var context: Chat, var list: ArrayList<ChatModel>, var usernam
             fileLayout = itemView.findViewById(R.id.fileLayout)
             tvFileTextView = itemView.findViewById(R.id.tvFileTextView)
             imgSeen = itemView.findViewById(R.id.imgSeen)
+            imgProfile = itemView.findViewById(R.id.imgProfile)
         }
     }
 

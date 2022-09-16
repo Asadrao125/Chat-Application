@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.asad.chatapplication.R
 import com.asad.chatapplication.adapters.UserAdapter
+import com.asad.chatapplication.adapters.UserSimpleAdapter
 import com.asad.chatapplication.models.ChatModel
 import com.asad.chatapplication.models.UserModel
 import com.asad.chatapplication.utils.Dialog_CustomProgress
@@ -32,6 +33,7 @@ import com.squareup.picasso.Picasso
 class Home : AppCompatActivity() {
     var recyclerViewUsers: RecyclerView? = null
     var adapter: UserAdapter? = null
+    var adapterUserSimple: UserSimpleAdapter? = null
     var profilePic: ImageView? = null
     var list: ArrayList<UserModel>? = null
     var mAuth: FirebaseAuth? = null
@@ -41,6 +43,8 @@ class Home : AppCompatActivity() {
     var recieverId: String = ""
     var userName: String = ""
     var customProgressDialog: Dialog_CustomProgress? = null
+    var tvAllUsers: TextView? = null
+    var tvAllChats: TextView? = null
 
     @SuppressLint("ResourceAsColor")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -53,11 +57,13 @@ class Home : AppCompatActivity() {
         recyclerViewUsers?.setHasFixedSize(true)
         list = ArrayList()
         tvName = findViewById(R.id.tvName)
+        tvAllUsers = findViewById(R.id.tvAllUsers)
+        tvAllChats = findViewById(R.id.tvAllChats)
         profilePic = findViewById(R.id.profilePic)
         mAuth = FirebaseAuth.getInstance()
         customProgressDialog = Dialog_CustomProgress(this)
 
-        getAllUsers()
+        getAllChats()
         getFirebaseToken()
 
         profilePic?.setOnClickListener {
@@ -74,6 +80,19 @@ class Home : AppCompatActivity() {
                 startActivity(intent, options.toBundle())
             }
         }
+
+        tvAllChats?.setOnClickListener {
+            tvAllChats!!.setBackgroundResource(R.drawable.curve_with_color)
+            tvAllUsers!!.setBackgroundResource(R.drawable.curve)
+            getAllChats()
+        }
+
+        tvAllUsers?.setOnClickListener {
+            tvAllChats!!.setBackgroundResource(R.drawable.curve)
+            tvAllUsers!!.setBackgroundResource(R.drawable.curve_with_color)
+            getAllUsers()
+        }
+
     }
 
     private fun getFirebaseToken() {
@@ -105,6 +124,36 @@ class Home : AppCompatActivity() {
     }
 
     private fun getAllUsers() {
+        list!!.clear()
+        customProgressDialog?.show()
+        val firebaseUser = FirebaseAuth.getInstance().currentUser
+        val reference = FirebaseDatabase.getInstance().getReference("Users")
+        reference.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(@NonNull dataSnapshot: DataSnapshot) {
+                list!!.clear()
+                customProgressDialog?.dismiss()
+                for (snapshot in dataSnapshot.children) {
+                    val user: UserModel = snapshot.getValue(UserModel::class.java)!!
+                    list!!.add(user)
+                    if (user.id.equals(firebaseUser!!.uid)) {
+                        profileUrl = user.profilePic
+                        senderId = firebaseUser.uid
+                        recieverId = user.id
+                        userName = user.name
+                        tvName?.text = user.name
+                        Picasso.get().load(profileUrl).placeholder(R.drawable.ic_user)
+                            .into(profilePic)
+                    }
+                }
+                adapterUserSimple = UserSimpleAdapter(this@Home, list!!, userName)
+                recyclerViewUsers?.setAdapter(adapterUserSimple)
+            }
+
+            override fun onCancelled(@NonNull databaseError: DatabaseError) {}
+        })
+    }
+
+    private fun getAllChats() {
         list!!.clear()
         customProgressDialog?.show()
         val firebaseUser = FirebaseAuth.getInstance().currentUser
