@@ -20,15 +20,7 @@
         <activity android:name=".activities.ViewImage" />
         <activity
             android:name=".activities.UploadImage"
-            android:exported="true" >
-
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-
-        </activity>
+            android:exported="true" />
         <activity android:name=".activities.Chat" />
         <activity android:name=".activities.Register" />
         <activity android:name=".activities.Login" />
@@ -36,11 +28,11 @@
             android:name=".activities.Splash"
             android:exported="true">
 
-            <!--<intent-filter>
+            <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>-->
+            </intent-filter>
 
         </activity>
         <activity android:name=".activities.Home" />

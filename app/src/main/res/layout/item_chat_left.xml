@@ -118,16 +118,32 @@
 
                     </LinearLayout>
 
-                    <TextView
-                        android:id="@+id/tvTime"
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="bottom"
-                        android:layout_marginStart="5dp"
-                        android:text="5:00 PM"
-                        android:textColor="@android:color/darker_gray"
-                        android:textSize="12sp"
-                        android:textStyle="bold" />
+                        android:layout_marginTop="5dp"
+                        android:layout_marginEnd="5dp">
+
+                        <ImageView
+                            android:id="@+id/imgReaction"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_gravity="center"
+                            android:layout_marginEnd="10dp"
+                            android:src="@drawable/like" />
+
+                        <TextView
+                            android:id="@+id/tvTime"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="bottom"
+                            android:layout_marginStart="5dp"
+                            android:text="5:00 PM"
+                            android:textColor="@android:color/darker_gray"
+                            android:textSize="12sp"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
 
                 </LinearLayout>
 

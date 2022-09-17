@@ -8,5 +8,6 @@ class ChatModel(
     var recieverId: String = "",
     var imageUrl: String = "",
     var fileUrl: String = "",
-    var messageStatus: String = ""
+    var messageStatus: String = "",
+    var messageReaction: String = ""
 )

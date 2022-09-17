@@ -73,6 +73,25 @@ class ChatAdapter(
             holder.imgSeen.setImageResource(R.drawable.ic_delivered)
         }
 
+        if (chatModel.messageReaction.equals("No")) {
+            holder.imgReaction.visibility = View.GONE
+        } else {
+            holder.imgReaction.visibility = View.VISIBLE
+            if (chatModel.messageReaction.equals("LIKE")) {
+                holder.imgReaction.setImageResource(R.drawable.like)
+            } else if (chatModel.messageReaction.equals("HEART")) {
+                holder.imgReaction.setImageResource(R.drawable.heart)
+            } else if (chatModel.messageReaction.equals("SMILE")) {
+                holder.imgReaction.setImageResource(R.drawable.happy)
+            } else if (chatModel.messageReaction.equals("SHOCK")) {
+                holder.imgReaction.setImageResource(R.drawable.shock)
+            } else if (chatModel.messageReaction.equals("SAD")) {
+                holder.imgReaction.setImageResource(R.drawable.sad)
+            } else if (chatModel.messageReaction.equals("ANGRY")) {
+                holder.imgReaction.setImageResource(R.drawable.angry)
+            }
+        }
+
         if (!chatModel.fileUrl.isEmpty()) {
             if (chatModel.fileUrl.contains("jpg") || chatModel.fileUrl.contains("png")
                 || chatModel.fileUrl.contains("jpeg")
@@ -160,6 +179,7 @@ class ChatAdapter(
         var cv: CardView
         var imgSeen: ImageView
         var imgProfile: ImageView
+        var imgReaction: ImageView
 
         init {
             tvMessage = itemView.findViewById(R.id.tvMessage)
@@ -172,6 +192,7 @@ class ChatAdapter(
             tvFileTextView = itemView.findViewById(R.id.tvFileTextView)
             imgSeen = itemView.findViewById(R.id.imgSeen)
             imgProfile = itemView.findViewById(R.id.imgProfile)
+            imgReaction = itemView.findViewById(R.id.imgReaction)
         }
     }
 

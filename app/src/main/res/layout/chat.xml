@@ -6,6 +6,10 @@
     android:orientation="vertical"
     tools:context=".activities.Chat">
 
+    <include
+        layout="@layout/popup_menu_layout"
+        android:visibility="gone" />
+
     <RelativeLayout
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
