@@ -5,7 +5,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -20,7 +19,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.asad.chatapplication.R
 import com.asad.chatapplication.adapters.UserAdapter
 import com.asad.chatapplication.adapters.UserSimpleAdapter
-import com.asad.chatapplication.models.ChatModel
 import com.asad.chatapplication.models.UserModel
 import com.asad.chatapplication.utils.Dialog_CustomProgress
 import com.asad.chatapplication.utils.StaticFunctions

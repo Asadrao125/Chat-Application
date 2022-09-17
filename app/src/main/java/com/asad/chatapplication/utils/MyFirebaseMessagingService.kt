@@ -91,6 +91,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
                 .setStyle(NotificationCompat.DecoratedCustomViewStyle())
                 .setContentIntent(clickPendingIntent)
                 .setAutoCancel(true)
+                .setNumber(3)
 
         if (Build.VERSION_CODES.O <= Build.VERSION.SDK_INT) {
             builder.setChannelId(createNotificationChannel())
@@ -126,6 +127,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
                 .setStyle(NotificationCompat.DecoratedCustomViewStyle())
                 .setContentIntent(clickPendingIntent)
                 .setAutoCancel(true)
+                .setNumber(5)
 
         if (Build.VERSION_CODES.O <= Build.VERSION.SDK_INT) {
             builder.setChannelId(createNotificationChannel())
@@ -143,6 +145,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         val mChannel =
             NotificationChannel(channelId, channelName, NotificationManager.IMPORTANCE_NONE)
         mChannel.importance = NotificationManager.IMPORTANCE_HIGH
+            mChannel.setShowBadge(false)
         val mNotificationManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
         mNotificationManager.createNotificationChannel(mChannel)
         return channelId
