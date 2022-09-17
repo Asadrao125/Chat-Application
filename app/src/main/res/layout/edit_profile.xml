@@ -5,9 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:paddingLeft="20dp"
-    android:paddingRight="20dp"
-    tools:context=".activities.Register">
+    android:padding="20dp"
+    tools:context=".activities.EditProfile">
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/imgProfile"
@@ -25,7 +24,7 @@
         android:layout_marginTop="10dp"
         android:background="@drawable/chatbg"
         android:padding="10dp"
-        android:text="Upload Image"
+        android:text="Update Image"
         android:textColor="@color/purple_700"
         android:textSize="16sp" />
 
@@ -44,6 +43,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
+        android:enabled="false"
         android:hint="Email"
         android:imeOptions="actionNext"
         android:inputType="textEmailAddress"
@@ -54,16 +54,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
+        android:enabled="false"
         android:hint="Password"
         android:imeOptions="actionDone"
         app:met_floatingLabel="normal" />
 
     <Button
-        android:id="@+id/btnRegister"
+        android:id="@+id/btnUpdate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="20dp"
-        android:text="Register" />
+        android:text="Update" />
 
 </LinearLayout>

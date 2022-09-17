@@ -153,7 +153,7 @@ class Register : AppCompatActivity() {
 
     private fun uploadImageToFirebase(fileUri: Uri) {
         val fileName = UUID.randomUUID().toString() + ".jpg"
-        val refStorage = FirebaseStorage.getInstance().reference.child("images/$fileName")
+        val refStorage = FirebaseStorage.getInstance().reference.child("profilePictures/$fileName")
 
         refStorage.putFile(fileUri)
             .addOnSuccessListener(

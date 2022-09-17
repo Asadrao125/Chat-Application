@@ -198,6 +198,9 @@ class Home : AppCompatActivity() {
         if (id == R.id.logoutMenu) {
             setStatus("offline", 1)
             return true
+        } else if (id == R.id.editProfileMenu) {
+            val intent = Intent(this, EditProfile::class.java)
+            startActivity(intent)
         }
         return super.onOptionsItemSelected(item)
     }

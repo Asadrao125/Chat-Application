@@ -51,15 +51,11 @@
             android:textColor="@color/black"
             android:textSize="18sp" />
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1px"
-            android:layout_below="@id/tvUserName"
-            android:layout_alignParentEnd="true"
-            android:layout_marginTop="10dp"
-            android:layout_toEndOf="@id/profileLayout"
-            android:background="@android:color/darker_gray" />
-
     </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@android:color/darker_gray" />
 
 </LinearLayout>
