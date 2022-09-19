@@ -8,25 +8,28 @@
     android:padding="20dp"
     tools:context=".activities.EditProfile">
 
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/imgProfile"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+    <RelativeLayout
+        android:layout_width="110dp"
+        android:layout_height="110dp"
         android:layout_gravity="center"
-        android:layout_marginTop="30dp"
-        android:src="@drawable/ic_user" />
+        android:layout_marginTop="30dp">
 
-    <TextView
-        android:id="@+id/btnUploadProfilePic"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/chatbg"
-        android:padding="10dp"
-        android:text="Update Image"
-        android:textColor="@color/purple_700"
-        android:textSize="16sp" />
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/imgProfile"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_user" />
+
+        <ImageView
+            android:id="@+id/imgChangeImage"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:src="@drawable/ic_change_image" />
+
+    </RelativeLayout>
 
     <com.rengwuxian.materialedittext.MaterialEditText
         android:id="@+id/etName"
@@ -36,6 +39,16 @@
         android:hint="Name"
         android:imeOptions="actionNext"
         android:inputType="textPersonName|textCapWords"
+        app:met_floatingLabel="normal" />
+
+    <com.rengwuxian.materialedittext.MaterialEditText
+        android:id="@+id/etAboutInfo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:hint="About Info"
+        android:imeOptions="actionNext"
+        android:inputType="textCapSentences"
         app:met_floatingLabel="normal" />
 
     <com.rengwuxian.materialedittext.MaterialEditText

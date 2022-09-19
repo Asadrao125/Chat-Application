@@ -19,6 +19,7 @@ import com.asad.chatapplication.activities.Chat
 import com.asad.chatapplication.activities.ViewImage
 import com.asad.chatapplication.models.ChatModel
 import com.asad.chatapplication.utils.StaticFunctions.Companion.OpenFile
+import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.squareup.picasso.Picasso

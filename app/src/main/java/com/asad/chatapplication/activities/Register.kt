@@ -1,7 +1,6 @@
 package com.asad.chatapplication.activities
 
 import android.content.Intent
-import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -32,6 +31,7 @@ import kotlin.collections.HashMap
 class Register : AppCompatActivity() {
     var etName: MaterialEditText? = null
     var etEmail: MaterialEditText? = null
+    var etAboutInfo: MaterialEditText? = null
     var etPassword: MaterialEditText? = null
     var btnRegister: Button? = null
     var btnUploadProfilePic: TextView? = null
@@ -56,6 +56,7 @@ class Register : AppCompatActivity() {
         customProgressDialog = Dialog_CustomProgress(this)
 
         etName = findViewById(R.id.etName)
+        etAboutInfo = findViewById(R.id.etAboutInfo)
         etEmail = findViewById(R.id.etEmail)
         etPassword = findViewById(R.id.etPassword)
         btnRegister = findViewById(R.id.btnRegister)
@@ -68,6 +69,7 @@ class Register : AppCompatActivity() {
             val name = etName?.text.toString().trim()
             val email = etEmail?.text.toString().trim()
             val password = etPassword?.text.toString().trim()
+            val aboutInfo = etAboutInfo?.text.toString().trim()
 
             if (imageUrl!!.isEmpty()) {
                 ShowToast(applicationContext, "Please Upload Image")
@@ -77,9 +79,11 @@ class Register : AppCompatActivity() {
                 ShowToast(applicationContext, "Please Enter Email")
             } else if (password.isEmpty()) {
                 ShowToast(applicationContext, "Please Enter Password")
+            } else if (aboutInfo.isEmpty()) {
+                ShowToast(applicationContext, "Please Enter About Info")
             } else {
                 customProgressDialog?.show()
-                getToken(name, email, password, imageUrl!!)
+                getToken(name, email, password, imageUrl!!, aboutInfo)
             }
         })
 
@@ -91,11 +95,17 @@ class Register : AppCompatActivity() {
         })
     }
 
-    private fun getToken(name: String, email: String, password: String, imageUrl: String) {
+    private fun getToken(
+        name: String,
+        email: String,
+        password: String,
+        imageUrl: String,
+        aboutInfo: String
+    ) {
         FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
             if (task.isSuccessful) {
                 val token = task.result
-                register(name, email, password, token, imageUrl)
+                register(name, email, password, token, imageUrl, aboutInfo)
             } else {
                 ShowToast(applicationContext, task.exception?.localizedMessage!!)
             }
@@ -107,7 +117,8 @@ class Register : AppCompatActivity() {
         email: String,
         password: String,
         token: String,
-        imageUrl: String
+        imageUrl: String,
+        aboutInfo: String
     ) {
         auth!!.createUserWithEmailAndPassword(email, password).addOnCompleteListener { task ->
             customProgressDialog?.dismiss()
@@ -121,6 +132,7 @@ class Register : AppCompatActivity() {
                 hashMap["password"] = password
                 hashMap["token"] = token
                 hashMap["profilePic"] = imageUrl
+                hashMap["aboutInfo"] = aboutInfo
                 userRef = rootRef?.child("Users")?.child(userid)
                 userRef?.setValue(hashMap)?.addOnCompleteListener(OnCompleteListener {
                     if (it.isSuccessful) {

@@ -9,8 +9,9 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.Button
 import android.widget.ImageView
-import android.widget.TextView
 import androidx.annotation.NonNull
+import androidx.core.app.ActivityOptionsCompat
+import androidx.core.util.Pair
 import com.asad.chatapplication.R
 import com.asad.chatapplication.models.UserModel
 import com.asad.chatapplication.utils.StaticFunctions
@@ -24,14 +25,14 @@ import com.google.firebase.storage.UploadTask
 import com.rengwuxian.materialedittext.MaterialEditText
 import com.squareup.picasso.Picasso
 import java.util.*
-import kotlin.collections.HashMap
 
 class EditProfile : AppCompatActivity() {
     var imgProfile: ImageView? = null
-    var btnUploadProfilePic: TextView? = null
+    var imgChangeImage: ImageView? = null
     var etName: MaterialEditText? = null
     var etEmail: MaterialEditText? = null
     var etPassword: MaterialEditText? = null
+    var etAboutInfo: MaterialEditText? = null
     var btnUpdate: Button? = null
     var uid: String? = ""
     var imageUrl: String? = ""
@@ -52,24 +53,28 @@ class EditProfile : AppCompatActivity() {
         getSupportActionBar()?.setDisplayShowHomeEnabled(true)
 
         imgProfile = findViewById(R.id.imgProfile)
-        btnUploadProfilePic = findViewById(R.id.btnUploadProfilePic)
+        imgChangeImage = findViewById(R.id.imgChangeImage)
         etName = findViewById(R.id.etName)
         etEmail = findViewById(R.id.etEmail)
         etPassword = findViewById(R.id.etPassword)
+        etAboutInfo = findViewById(R.id.etAboutInfo)
         btnUpdate = findViewById(R.id.btnUpdate)
 
         setFirebaseData()
 
         btnUpdate?.setOnClickListener(View.OnClickListener {
             val name = etName?.text.toString().trim()
+            val aboutInfo = etAboutInfo?.text.toString().trim()
             if (name.isEmpty()) {
                 StaticFunctions.ShowToast(applicationContext, "Please Enter Name")
-            } else {
-                updateFirebaseData(name)
+            } /*else if (aboutInfo.isEmpty()) {
+                StaticFunctions.ShowToast(applicationContext, "Please Enter About Info")
+            }*/ else {
+                updateFirebaseData(name, aboutInfo)
             }
         })
 
-        btnUploadProfilePic?.setOnClickListener {
+        imgChangeImage?.setOnClickListener {
             val intent = Intent()
             intent.type = "image/*"
             intent.action = Intent.ACTION_GET_CONTENT
@@ -77,11 +82,12 @@ class EditProfile : AppCompatActivity() {
         }
     }
 
-    fun updateFirebaseData(name: String) {
+    fun updateFirebaseData(name: String, aboutInfo: String) {
         reference?.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(@NonNull dataSnapshot: DataSnapshot) {
                 val user: UserModel = dataSnapshot.getValue(UserModel::class.java)!!
                 reference!!.child("name").setValue(name)
+                reference!!.child("aboutInfo").setValue(aboutInfo)
                 etPassword?.setText(user.password)
                 etEmail?.setText(user.email)
                 etName?.setText(user.name)
@@ -129,8 +135,21 @@ class EditProfile : AppCompatActivity() {
                 etPassword?.setText(user.password)
                 etEmail?.setText(user.email)
                 etName?.setText(user.name)
-                Picasso.get().load(user.profilePic).placeholder(R.drawable.ic_user)
-                    .into(imgProfile)
+                etAboutInfo?.setText(user.aboutInfo)
+                Picasso.get().load(user.profilePic).placeholder(R.drawable.ic_user).into(imgProfile)
+
+                imgProfile?.setOnClickListener {
+                    val intent = Intent(applicationContext, ViewImage::class.java)
+                    intent.putExtra("imageUrl", user.profilePic)
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                    val transition =
+                        Pair.create<View?, String?>(imgProfile, "transition")
+                    val options =
+                        ActivityOptionsCompat.makeSceneTransitionAnimation(
+                            this@EditProfile, transition
+                        )
+                    startActivity(intent, options.toBundle())
+                }
             }
 
             override fun onCancelled(@NonNull databaseError: DatabaseError) {}

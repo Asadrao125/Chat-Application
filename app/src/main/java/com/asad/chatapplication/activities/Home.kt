@@ -110,6 +110,7 @@ class Home : AppCompatActivity() {
                         hashMap["password"] = user.password
                         hashMap["token"] = token
                         hashMap["profilePic"] = user.profilePic
+                        hashMap["aboutInfo"] = user.aboutInfo
                         reference.setValue(hashMap)
                     }
 
