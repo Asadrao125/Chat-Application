@@ -210,7 +210,6 @@ class Home : AppCompatActivity() {
                 FirebaseDatabase.getInstance().getReference().child("Statuses")
             val auth: FirebaseAuth = FirebaseAuth.getInstance()
             val firebaseUser = auth.currentUser
-
             if (logoutOrSetStatus == 1) {
                 val hashMap: HashMap<String, String> = HashMap()
                 hashMap["status"] = userStatus

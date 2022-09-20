@@ -3,12 +3,14 @@ package com.asad.chatapplication.utils
 import android.content.ActivityNotFoundException
 import android.content.ContentResolver
 import android.content.Context
+import android.content.Context.CONNECTIVITY_SERVICE
 import android.content.Intent
 import android.graphics.*
+import android.net.ConnectivityManager
 import android.net.Uri
-import android.view.Display
 import android.webkit.MimeTypeMap
 import android.widget.Toast
+import androidx.core.content.ContextCompat.getSystemService
 import java.io.File
 import java.text.DateFormat
 import java.text.SimpleDateFormat
@@ -110,5 +112,13 @@ class StaticFunctions {
             canvas.drawBitmap(bitmap, rect, rect, paint)
             return output
         }
+
+        fun IsOnline(context: Context): Boolean {
+            val activeNetworkInfo =
+                (context.getSystemService(CONNECTIVITY_SERVICE) as ConnectivityManager?)!!.activeNetworkInfo
+            return activeNetworkInfo != null &&
+                    activeNetworkInfo.isConnectedOrConnecting
+        }
+
     }
 }

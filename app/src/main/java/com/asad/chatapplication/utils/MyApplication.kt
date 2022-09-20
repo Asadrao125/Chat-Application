@@ -1,4 +1,4 @@
-package com.asad.chatapplication.activities
+package com.asad.chatapplication.utils
 
 import android.app.Application
 import android.os.Handler
@@ -6,6 +6,7 @@ import android.os.Looper
 import android.util.Log
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleObserver
+import androidx.lifecycle.Observer
 import androidx.lifecycle.OnLifecycleEvent
 import androidx.lifecycle.ProcessLifecycleOwner
 import com.asad.chatapplication.utils.StaticFunctions
@@ -14,6 +15,7 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 
 class MyApplication : Application(), LifecycleObserver {
+
     override fun onCreate() {
         super.onCreate()
         ProcessLifecycleOwner.get().lifecycle.addObserver(this)
