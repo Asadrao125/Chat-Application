@@ -57,7 +57,8 @@ class UserAdapter(var context: Home, var list: ArrayList<UserModel>, var usernam
         }
 
         if (userModel.id.equals(firebaseUser!!.uid)) {
-            holder.tvUserName.text = "You"
+            userModel.name = userModel.name + " (You)"
+            holder.tvUserName.text = userModel.name
         }
 
         holder.itemView.setOnClickListener {
