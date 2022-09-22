@@ -20,7 +20,7 @@ import com.asad.chatapplication.R
 import com.asad.chatapplication.adapters.UserAdapter
 import com.asad.chatapplication.adapters.UserSimpleAdapter
 import com.asad.chatapplication.models.UserModel
-import com.asad.chatapplication.utils.Dialog_CustomProgress
+import com.asad.chatapplication.utils.DialogCustomProgress
 import com.asad.chatapplication.utils.StaticFunctions
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.auth.FirebaseAuth
@@ -40,7 +40,7 @@ class Home : AppCompatActivity() {
     var senderId: String = ""
     var recieverId: String = ""
     var userName: String = ""
-    var customProgressDialog: Dialog_CustomProgress? = null
+    var customProgressDialog: DialogCustomProgress? = null
     var tvAllUsers: TextView? = null
     var tvAllChats: TextView? = null
 
@@ -59,7 +59,7 @@ class Home : AppCompatActivity() {
         tvAllChats = findViewById(R.id.tvAllChats)
         profilePic = findViewById(R.id.profilePic)
         mAuth = FirebaseAuth.getInstance()
-        customProgressDialog = Dialog_CustomProgress(this)
+        customProgressDialog = DialogCustomProgress(this)
 
         getAllChats()
         getFirebaseToken()

@@ -2,16 +2,13 @@ package com.asad.chatapplication.activities
 
 import android.Manifest
 import android.content.Intent
-import android.net.Uri
-import android.os.Build
 import android.os.Bundle
-import android.provider.Settings
 import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.asad.chatapplication.R
-import com.asad.chatapplication.utils.Dialog_CustomProgress
+import com.asad.chatapplication.utils.DialogCustomProgress
 import com.asad.chatapplication.utils.StaticFunctions.Companion.ShowToast
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.auth.FirebaseAuth
@@ -29,7 +26,7 @@ class Login : AppCompatActivity() {
     var layoutCreateAccount: LinearLayout? = null
     var btnLogin: Button? = null
     var mAuth: FirebaseAuth? = null
-    var customProgressDialog: Dialog_CustomProgress? = null
+    var customProgressDialog: DialogCustomProgress? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,7 +38,7 @@ class Login : AppCompatActivity() {
         layoutCreateAccount = findViewById(R.id.layoutCreateAccount)
         btnLogin = findViewById(R.id.btnLogin)
         mAuth = FirebaseAuth.getInstance()
-        customProgressDialog = Dialog_CustomProgress(this)
+        customProgressDialog = DialogCustomProgress(this)
 
         val user = FirebaseAuth.getInstance().currentUser
         if (user != null) {

@@ -11,7 +11,7 @@ import android.widget.LinearLayout
 import android.widget.ProgressBar
 import com.asad.chatapplication.R
 
-class Dialog_CustomProgress(private val activity: Activity) : Dialog(activity) {
+class DialogCustomProgress(private val activity: Activity) : Dialog(activity) {
     private var ll_progress_dialog: LinearLayout? = null
     private var progressBar2: ProgressBar? = null
     protected override fun onCreate(savedInstanceState: Bundle?) {

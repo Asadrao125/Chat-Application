@@ -13,7 +13,7 @@ import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import com.asad.chatapplication.R
-import com.asad.chatapplication.utils.Dialog_CustomProgress
+import com.asad.chatapplication.utils.DialogCustomProgress
 import com.asad.chatapplication.utils.StaticFunctions.Companion.ShowToast
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.gms.tasks.OnFailureListener
@@ -39,7 +39,7 @@ class Register : AppCompatActivity() {
     var auth: FirebaseAuth? = null
     var rootRef: DatabaseReference? = null
     var userRef: DatabaseReference? = null
-    var customProgressDialog: Dialog_CustomProgress? = null
+    var customProgressDialog: DialogCustomProgress? = null
     var Image_Request_Code = 7
     var imageUrl: String? = ""
 
@@ -53,7 +53,7 @@ class Register : AppCompatActivity() {
         getSupportActionBar()?.setDisplayHomeAsUpEnabled(true)
         getSupportActionBar()?.setDisplayShowHomeEnabled(true)
 
-        customProgressDialog = Dialog_CustomProgress(this)
+        customProgressDialog = DialogCustomProgress(this)
 
         etName = findViewById(R.id.etName)
         etAboutInfo = findViewById(R.id.etAboutInfo)
