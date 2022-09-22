@@ -54,14 +54,15 @@ class Login : AppCompatActivity() {
             val email = etEmail?.text.toString().trim()
             val password = etPassword?.text.toString().trim()
             if (!email.isEmpty() && !password.isEmpty()) {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-                    checkPermission(email, password)
-                } else {
+                /*if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
                     val intent = Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION)
                     val uri: Uri = Uri.fromParts("package", packageName, null)
                     intent.data = uri
                     startActivity(intent)
-                }
+                } else {
+                    checkPermission(email, password)
+                }*/
+                checkPermission(email, password)
             } else {
                 Toast.makeText(this, "Please enter email or password", Toast.LENGTH_SHORT).show()
             }

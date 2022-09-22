@@ -69,10 +69,8 @@ class Home : AppCompatActivity() {
                 val intent = Intent(applicationContext, ViewImage::class.java)
                 intent.putExtra("imageUrl", profileUrl)
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                val transition =
-                    Pair.create<View?, String?>(profilePic, "transition")
-                val options =
-                    ActivityOptionsCompat.makeSceneTransitionAnimation(
+                val transition = Pair.create<View?, String?>(profilePic, "transition")
+                val options = ActivityOptionsCompat.makeSceneTransitionAnimation(
                         this@Home, transition
                     )
                 startActivity(intent, options.toBundle())
@@ -174,7 +172,7 @@ class Home : AppCompatActivity() {
                             .into(profilePic)
                     }
                 }
-                adapter = UserAdapter(this@Home, list!!, userName)
+                adapter = UserAdapter(this@Home, list!!, userName, profileUrl)
                 recyclerViewUsers?.setAdapter(adapter)
             }
 

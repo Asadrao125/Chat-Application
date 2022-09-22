@@ -20,15 +20,16 @@ import java.util.*
 
 class MyFirebaseMessagingService : FirebaseMessagingService() {
     var params: Map<String, String>? = null
-    var title: String = ""
+    var senderName: String = ""
     var body: String = ""
     var senderId: String = ""
     var recieverId: String = ""
-    var profilePicUrl: String = ""
+    var senderPic: String = ""
     var messageType: String = ""
     var fileUrl: String = ""
     var recieverName: String = ""
     var token: String = ""
+    var recieverPic: String = ""
 
     override fun onMessageReceived(remoteMessage: RemoteMessage) {
         super.onMessageReceived(remoteMessage)
@@ -36,61 +37,54 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         params = remoteMessage.data
 
         if (params!!.size != 0) {
-            title = params!!.get("title")!!
-            body = params!!.get("body")!!
             senderId = params!!.get("senderId")!!
             recieverId = params!!.get("recieverId")!!
-            profilePicUrl = params!!.get("profilePicUrl")!!
+            senderPic = params!!.get("senderPic")!!
+            recieverPic = params!!.get("recieverPic")!!
             messageType = params!!.get("messageType")!!
+            senderName = params!!.get("senderName")!!
             recieverName = params!!.get("recieverName")!!
             token = params!!.get("token")!!
+            body = params!!.get("body")!!
 
             if (messageType.equals("1")) {
-                showNotificationSimple(title, body, profilePicUrl)
+                showNotificationSimple()
             } else if (messageType.equals("2")) {
                 val imageUrl = params!!.get("imageUrl")
-                showNotificationWithAttachment(title, body, profilePicUrl, imageUrl!!)
+                showNotificationWithAttachment(imageUrl!!)
             } else if (messageType.equals("3")) {
                 fileUrl = params!!.get("fileUrl")!!
                 if (fileUrl.contains("jpg") || fileUrl.contains("png") || fileUrl.contains("jpeg")) {
-                    showNotificationWithAttachment(title, body, profilePicUrl, fileUrl)
+                    showNotificationWithAttachment(fileUrl)
                 } else {
-                    showNotificationSimple(title, body, profilePicUrl)
+                    showNotificationSimple()
                 }
             } else if (messageType.equals("4")) {
-                showNotificationSimple(title, body, profilePicUrl)
+                showNotificationSimple()
             }
         }
     }
 
-    fun showNotificationWithAttachment(
-        title: String, body: String, profilePicUrl: String, attachmentUrl: String
-    ) {
+    fun showNotificationWithAttachment(attachmentUrl: String) {
         val collapsedView = RemoteViews(packageName, R.layout.notification_collapsed)
         val expandedView = RemoteViews(packageName, R.layout.notification_expanded)
 
-        collapsedView.setTextViewText(R.id.tvCollapsedTitle, title)
+        collapsedView.setTextViewText(R.id.tvCollapsedTitle, senderName)
         collapsedView.setTextViewText(R.id.tvCollapsedMessage, body)
 
-        val clickIntent = Intent(this, Chat::class.java)
-        clickIntent.putExtra("senderId", senderId)
-        clickIntent.putExtra("recieverId", recieverId)
-        clickIntent.putExtra("username", recieverName)
-        clickIntent.putExtra("fcmToken", token)
-        clickIntent.putExtra("senderName", title)
-        clickIntent.putExtra("profilePic", profilePicUrl)
+        val clickIntent = Intent(this, Home::class.java)
         clickIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
 
         val clickPendingIntent = PendingIntent.getActivity(this, 0, clickIntent, 0)
 
         collapsedView.setImageViewBitmap(
             R.id.imgProfileCollapsed,
-            getRoundedCornerBitmap(profilePicUrl)
+            getRoundedCornerBitmap(senderPic)
         )
 
         expandedView.setImageViewBitmap(
             R.id.imgProfileExpanded,
-            getRoundedCornerBitmap(profilePicUrl)
+            getRoundedCornerBitmap(senderPic)
         )
 
         expandedView.setImageViewBitmap(
@@ -98,7 +92,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
             getRoundedCornerBitmap(attachmentUrl)
         )
 
-        expandedView.setTextViewText(R.id.tvExpandedTitle, title)
+        expandedView.setTextViewText(R.id.tvExpandedTitle, senderName)
         expandedView.setTextViewText(R.id.tvExpandedMessage, body)
         expandedView.setOnClickPendingIntent(R.id.imgExpanded, clickPendingIntent)
 
@@ -121,29 +115,20 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         notificationManager.notify(Random(100).nextInt(), builder.build())
     }
 
-    fun showNotificationSimple(title: String, body: String, profilePicUrl: String) {
+    fun showNotificationSimple() {
         val collapsedView = RemoteViews(packageName, R.layout.notification_collapsed)
 
-        collapsedView.setTextViewText(R.id.tvCollapsedTitle, title)
+        collapsedView.setTextViewText(R.id.tvCollapsedTitle, senderName)
         collapsedView.setTextViewText(R.id.tvCollapsedMessage, body)
-        collapsedView.setImageViewResource(
-            R.id.imgProfileCollapsed,
-            R.drawable.ic_launcher_background
-        )
-        val clickIntent = Intent(this, Chat::class.java)
-        clickIntent.putExtra("senderId", senderId)
-        clickIntent.putExtra("recieverId", recieverId)
-        clickIntent.putExtra("username", recieverName)
-        clickIntent.putExtra("fcmToken", token)
-        clickIntent.putExtra("senderName", title)
-        clickIntent.putExtra("profilePic", profilePicUrl)
+
+        val clickIntent = Intent(this, Home::class.java)
         clickIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
 
         val clickPendingIntent = PendingIntent.getActivity(this, 0, clickIntent, 0)
 
         collapsedView.setImageViewBitmap(
             R.id.imgProfileCollapsed,
-            getRoundedCornerBitmap(profilePicUrl)
+            getRoundedCornerBitmap(senderPic)
         )
 
         val channelId = getString(R.string.default_notification_channel_id)

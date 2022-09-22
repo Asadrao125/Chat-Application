@@ -2,7 +2,6 @@ package com.asad.chatapplication.adapters
 
 import android.content.Intent
 import android.graphics.Typeface
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -23,7 +22,12 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import com.squareup.picasso.Picasso
 
-class UserAdapter(var context: Home, var list: ArrayList<UserModel>, var username: String) :
+class UserAdapter(
+    var context: Home,
+    var list: ArrayList<UserModel>,
+    var username: String,
+    var profileUrl: String
+) :
     RecyclerView.Adapter<UserAdapter.MyViewHolder>() {
     val firebaseUser = FirebaseAuth.getInstance().currentUser
 
@@ -63,10 +67,11 @@ class UserAdapter(var context: Home, var list: ArrayList<UserModel>, var usernam
             val intent = Intent(context, Chat::class.java)
             intent.putExtra("senderId", firebaseUser.uid)
             intent.putExtra("recieverId", userModel.id)
-            intent.putExtra("username", userModel.name)
-            intent.putExtra("fcmToken", userModel.token)
+            intent.putExtra("recieverName", userModel.name)
+            intent.putExtra("token", userModel.token)
             intent.putExtra("senderName", username)
-            intent.putExtra("profilePic", list.get(position).profilePic)
+            intent.putExtra("recieverPic", userModel.profilePic)
+            intent.putExtra("senderPic", profileUrl)
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
             context.startActivity(intent)
         }

@@ -1,7 +1,6 @@
 package com.asad.chatapplication.adapters
 
 import android.content.Intent
-import android.graphics.Typeface
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -23,7 +22,11 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import com.squareup.picasso.Picasso
 
-class UserSimpleAdapter(var context: Home, var list: ArrayList<UserModel>, var username: String) :
+class UserSimpleAdapter(
+    var context: Home,
+    var list: ArrayList<UserModel>,
+    var username: String
+) :
     RecyclerView.Adapter<UserSimpleAdapter.MyViewHolder>() {
     val firebaseUser = FirebaseAuth.getInstance().currentUser
 
