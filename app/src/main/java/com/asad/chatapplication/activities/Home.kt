@@ -41,8 +41,6 @@ class Home : AppCompatActivity() {
     var recieverId: String = ""
     var userName: String = ""
     var customProgressDialog: DialogCustomProgress? = null
-    var tvAllUsers: TextView? = null
-    var tvAllChats: TextView? = null
 
     @SuppressLint("ResourceAsColor")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -55,8 +53,6 @@ class Home : AppCompatActivity() {
         recyclerViewUsers?.setHasFixedSize(true)
         list = ArrayList()
         tvName = findViewById(R.id.tvName)
-        tvAllUsers = findViewById(R.id.tvAllUsers)
-        tvAllChats = findViewById(R.id.tvAllChats)
         profilePic = findViewById(R.id.profilePic)
         mAuth = FirebaseAuth.getInstance()
         customProgressDialog = DialogCustomProgress(this)
@@ -71,24 +67,11 @@ class Home : AppCompatActivity() {
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                 val transition = Pair.create<View?, String?>(profilePic, "transition")
                 val options = ActivityOptionsCompat.makeSceneTransitionAnimation(
-                        this@Home, transition
-                    )
+                    this@Home, transition
+                )
                 startActivity(intent, options.toBundle())
             }
         }
-
-        tvAllChats?.setOnClickListener {
-            tvAllChats!!.setBackgroundResource(R.drawable.curve_with_color)
-            tvAllUsers!!.setBackgroundResource(R.drawable.curve)
-            getAllChats()
-        }
-
-        tvAllUsers?.setOnClickListener {
-            tvAllChats!!.setBackgroundResource(R.drawable.curve)
-            tvAllUsers!!.setBackgroundResource(R.drawable.curve_with_color)
-            getAllUsers()
-        }
-
     }
 
     private fun getFirebaseToken() {

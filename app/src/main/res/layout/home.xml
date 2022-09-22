@@ -39,49 +39,11 @@
 
     </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/buttonLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/nameLayout"
-        android:layout_margin="10dp"
-        android:orientation="horizontal"
-        android:visibility="gone"
-        android:weightSum="2">
-
-        <TextView
-            android:id="@+id/tvAllChats"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="5dp"
-            android:layout_weight="1"
-            android:background="@drawable/curve_with_color"
-            android:gravity="center"
-            android:padding="10dp"
-            android:text="All Chats"
-            android:textColor="@color/black"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/tvAllUsers"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:layout_weight="1"
-            android:background="@drawable/curve"
-            android:gravity="center"
-            android:padding="10dp"
-            android:text="All Users"
-            android:textColor="@color/black"
-            android:textStyle="bold" />
-
-    </LinearLayout>
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewUsers"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/buttonLayout"
+        android:layout_below="@+id/nameLayout"
         tools:listitem="@layout/item_user" />
 
 </RelativeLayout>
