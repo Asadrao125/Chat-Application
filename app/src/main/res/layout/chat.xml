@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -85,7 +86,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_toStartOf="@id/imgSend"
+            android:layout_toStartOf="@id/layout"
             android:background="@drawable/chatbg">
 
             <EditText
@@ -111,15 +112,43 @@
 
         </RelativeLayout>
 
-        <ImageView
-            android:id="@+id/imgSend"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+        <RelativeLayout
+            android:id="@+id/layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:padding="10dp"
-            android:src="@drawable/ic_send" />
+            android:layout_marginLeft="3dp"
+            android:layout_marginRight="3dp"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/imgSend"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:padding="5dp"
+                android:src="@drawable/send"
+                android:visibility="gone"
+                app:tint="@color/purple_700" />
+
+            <ImageView
+                android:id="@+id/imgStartRecording"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:padding="5dp"
+                android:src="@drawable/ic_mic"
+                app:tint="@color/purple_700" />
+
+            <ImageView
+                android:id="@+id/imgStopRecording"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:padding="5dp"
+                android:src="@drawable/ic_stop"
+                android:visibility="gone"
+                app:tint="@color/purple_700" />
+
+        </RelativeLayout>
 
     </RelativeLayout>
 

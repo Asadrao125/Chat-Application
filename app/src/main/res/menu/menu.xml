@@ -3,12 +3,10 @@
 
     <item
         android:id="@+id/imageMenu"
-        android:icon="@drawable/ic_gallery"
         android:title="Attach Image" />
 
     <item
         android:id="@+id/fileMenu"
-        android:icon="@drawable/ic_attach_file"
         android:title="Attach File" />
 
 </menu>

@@ -1,9 +1,12 @@
 package com.asad.chatapplication.activities
 
+import android.Manifest
 import android.content.Intent
+import android.net.Uri
+import android.os.Build
 import android.os.Bundle
+import android.provider.Settings
 import android.widget.Button
-import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -12,7 +15,13 @@ import com.asad.chatapplication.utils.Dialog_CustomProgress
 import com.asad.chatapplication.utils.StaticFunctions.Companion.ShowToast
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.auth.FirebaseAuth
+import com.karumi.dexter.Dexter
+import com.karumi.dexter.MultiplePermissionsReport
+import com.karumi.dexter.PermissionToken
+import com.karumi.dexter.listener.PermissionRequest
+import com.karumi.dexter.listener.multi.MultiplePermissionsListener
 import com.rengwuxian.materialedittext.MaterialEditText
+
 
 class Login : AppCompatActivity() {
     var etEmail: MaterialEditText? = null
@@ -45,7 +54,14 @@ class Login : AppCompatActivity() {
             val email = etEmail?.text.toString().trim()
             val password = etPassword?.text.toString().trim()
             if (!email.isEmpty() && !password.isEmpty()) {
-                login(email, password)
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+                    checkPermission(email, password)
+                } else {
+                    val intent = Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION)
+                    val uri: Uri = Uri.fromParts("package", packageName, null)
+                    intent.data = uri
+                    startActivity(intent)
+                }
             } else {
                 Toast.makeText(this, "Please enter email or password", Toast.LENGTH_SHORT).show()
             }
@@ -55,6 +71,27 @@ class Login : AppCompatActivity() {
             val intent = Intent(this@Login, Register::class.java)
             startActivity(intent)
         }
+    }
+
+    fun checkPermission(email: String, password: String) {
+        Dexter.withContext(this)
+            .withPermissions(
+                Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                Manifest.permission.RECORD_AUDIO
+            ).withListener(object : MultiplePermissionsListener {
+                override fun onPermissionsChecked(report: MultiplePermissionsReport) {
+                    if (report.areAllPermissionsGranted()) {
+                        login(email, password)
+                    }
+                }
+
+                override fun onPermissionRationaleShouldBeShown(
+                    permissions: List<PermissionRequest?>?,
+                    token: PermissionToken?
+                ) {
+                    token!!.continuePermissionRequest()
+                }
+            }).check()
     }
 
     private fun login(email: String, password: String) {

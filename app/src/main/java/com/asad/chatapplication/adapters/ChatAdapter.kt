@@ -2,6 +2,7 @@ package com.asad.chatapplication.adapters
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.media.MediaPlayer
 import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
@@ -19,14 +20,12 @@ import com.asad.chatapplication.activities.Chat
 import com.asad.chatapplication.activities.ViewImage
 import com.asad.chatapplication.models.ChatModel
 import com.asad.chatapplication.utils.StaticFunctions.Companion.OpenFile
-import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.squareup.picasso.Picasso
 
 class ChatAdapter(
     var context: Chat,
-    var list: ArrayList<ChatModel>,
     var username: String,
     var profilePicUrl: String
 ) :
@@ -34,6 +33,8 @@ class ChatAdapter(
     val MSG_TYPE_LEFT: Int = 0
     val MSG_TYPE_RIGHT: Int = 1
     var fuser: FirebaseUser? = null
+    var selectedPosition = -1
+    var list: ArrayList<ChatModel> = ArrayList()
 
     override fun onCreateViewHolder(@NonNull parent: ViewGroup, viewType: Int): MyViewHolder {
         val view: View?
@@ -52,12 +53,24 @@ class ChatAdapter(
         holder.tvName.text = username
         holder.tvTime.text = chatModel.time
 
+        if (selectedPosition == position) {
+            holder.imageVoiceType.setImageResource(R.drawable.ic_stop)
+        } else {
+            holder.imageVoiceType.setImageResource(R.drawable.ic_play)
+        }
+
         if (chatModel.imageUrl.isEmpty()) {
             holder.cv.visibility = View.GONE
         } else {
             Picasso.get().load(chatModel.imageUrl).placeholder(R.drawable.ic_gallery)
                 .into(holder.imageViewChat)
             holder.cv.visibility = View.VISIBLE
+        }
+
+        if (chatModel.voiceMessage.isEmpty()) {
+            holder.voiceLayout!!.visibility = View.GONE
+        } else {
+            holder.voiceLayout!!.visibility = View.VISIBLE
         }
 
         Picasso.get().load(profilePicUrl).placeholder(R.drawable.ic_gallery).into(holder.imgProfile)
@@ -142,6 +155,11 @@ class ChatAdapter(
         }
     }
 
+    public fun setData(chatList: ArrayList<ChatModel>) {
+        list = chatList;
+        notifyDataSetChanged()
+    }
+
     private fun setFileText(fileUrl: String, holder: MyViewHolder) {
         val ext: String = fileUrl
         if (ext.contains("pdf")) {
@@ -174,9 +192,12 @@ class ChatAdapter(
         var tvName: TextView
         var tvTime: TextView
         var fileLayout: LinearLayout? = null
+        var voiceLayout: LinearLayout? = null
         var tvFileTextView: TextView? = null
         var imageViewChat: ImageView
         var imageFileType: ImageView
+        var imageVoiceType: ImageView
+        var tvVoiceTextView: TextView
         var cv: CardView
         var imgSeen: ImageView
         var imgProfile: ImageView
@@ -187,13 +208,16 @@ class ChatAdapter(
             tvName = itemView.findViewById(R.id.tvName)
             tvTime = itemView.findViewById(R.id.tvTime)
             imageViewChat = itemView.findViewById(R.id.imageViewChat)
+            imageVoiceType = itemView.findViewById(R.id.imageVoiceType)
             imageFileType = itemView.findViewById(R.id.imageFileType)
             cv = itemView.findViewById(R.id.cv)
             fileLayout = itemView.findViewById(R.id.fileLayout)
+            voiceLayout = itemView.findViewById(R.id.voiceLayout)
             tvFileTextView = itemView.findViewById(R.id.tvFileTextView)
             imgSeen = itemView.findViewById(R.id.imgSeen)
             imgProfile = itemView.findViewById(R.id.imgProfile)
             imgReaction = itemView.findViewById(R.id.imgReaction)
+            tvVoiceTextView = itemView.findViewById(R.id.tvVoiceTextView)
         }
     }
 

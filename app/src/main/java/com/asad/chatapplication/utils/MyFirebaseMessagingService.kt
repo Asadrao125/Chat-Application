@@ -145,7 +145,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         val mChannel =
             NotificationChannel(channelId, channelName, NotificationManager.IMPORTANCE_NONE)
         mChannel.importance = NotificationManager.IMPORTANCE_HIGH
-            mChannel.setShowBadge(false)
+        mChannel.setShowBadge(false)
         val mNotificationManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
         mNotificationManager.createNotificationChannel(mChannel)
         return channelId

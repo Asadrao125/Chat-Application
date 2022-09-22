@@ -75,4 +75,6 @@ dependencies {
     // Glide
     implementation 'com.github.bumptech.glide:glide:4.13.2'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.13.2'
+    // Runtime permissions
+    implementation 'com.karumi:dexter:6.2.3'
 }
