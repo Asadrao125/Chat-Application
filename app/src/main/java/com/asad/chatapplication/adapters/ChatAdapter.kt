@@ -63,8 +63,7 @@ class ChatAdapter(
         if (chatModel.imageUrl.isEmpty()) {
             holder.cv.visibility = View.GONE
         } else {
-            Picasso.get().load(chatModel.imageUrl).placeholder(R.drawable.ic_gallery)
-                .into(holder.imageViewChat)
+            Picasso.get().load(chatModel.imageUrl).placeholder(R.drawable.ic_gallery).into(holder.imageViewChat)
             holder.cv.visibility = View.VISIBLE
         }
 
@@ -106,9 +105,8 @@ class ChatAdapter(
         }
 
         if (!chatModel.fileUrl.isEmpty()) {
-            if (chatModel.fileUrl.contains("jpg") || chatModel.fileUrl.contains("png")
-                || chatModel.fileUrl.contains("jpeg")
-            ) {
+            val url = chatModel.fileUrl
+            if (url.contains("jpg") || url.contains("png") || url.contains("jpeg")) {
                 Picasso.get().load(chatModel.fileUrl).placeholder(R.drawable.ic_gallery)
                     .into(holder.imageViewChat)
                 holder.cv.visibility = View.VISIBLE
@@ -125,74 +123,50 @@ class ChatAdapter(
         }
 
         holder.itemView.setOnClickListener {
+            val transition = Pair.create<View?, String?>(holder.imageViewChat, "transition")
+            val options = ActivityOptionsCompat.makeSceneTransitionAnimation(context, transition)
             if (!chatModel.imageUrl.isEmpty()) {
                 val intent = Intent(context, ViewImage::class.java)
                 intent.putExtra("imageUrl", chatModel.imageUrl)
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                val transition =
-                    Pair.create<View?, String?>(holder.imageViewChat, "transition")
-                val options =
-                    ActivityOptionsCompat.makeSceneTransitionAnimation(context, transition)
                 context.startActivity(intent, options.toBundle())
             } else if (!chatModel.fileUrl.isEmpty()) {
-                if (chatModel.fileUrl.contains("jpg") || chatModel.fileUrl.contains("png")
-                    || chatModel.fileUrl.contains("jpeg")
-                ) {
+                val url = chatModel.fileUrl
+                if (url.contains("jpg") || url.contains("png") || url.contains("jpeg")) {
                     val intent = Intent(context, ViewImage::class.java)
                     intent.putExtra("imageUrl", chatModel.fileUrl)
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                    val transition =
-                        Pair.create<View?, String?>(holder.imageViewChat, "transition")
-                    val options =
-                        ActivityOptionsCompat.makeSceneTransitionAnimation(context, transition)
                     context.startActivity(intent, options.toBundle())
                 } else {
                     val uri: Uri = Uri.parse(chatModel.fileUrl)
                     OpenFile(chatModel.fileUrl, uri, context)
                 }
-            } else if (!chatModel.voiceMessage.isEmpty()) {
-                val player = MediaPlayer()
-
-                if (player.isPlaying) {
-                    player.stop()
-                    player.release()
-                } else {
-                    player.setDataSource(chatModel.voiceMessage)
-                    player.prepare()
-                    player.start()
-                }
-
-                holder.imageVoiceType.setImageResource(R.drawable.ic_stop)
-
-                player.setOnCompletionListener {
-                    player.release()
-                    holder.imageVoiceType.setImageResource(R.drawable.ic_play)
-                }
             }
         }
     }
 
-    private fun setFileText(fileUrl: String, holder: MyViewHolder) {
-        val ext: String = fileUrl
+    private fun setFileText(ext: String, holder: MyViewHolder) {
+        var fileName = "File Attached"
+        var drawable = R.drawable.ic_file
         if (ext.contains("pdf")) {
-            holder.tvFileTextView?.setText("Pdf File Attached")
-            holder.imageFileType.setImageResource(R.drawable.ic_pdf)
+            fileName = "Pdf"
+            drawable = R.drawable.ic_pdf
         } else if (ext.contains("docx")) {
-            holder.tvFileTextView?.setText("Docx File Attached")
-            holder.imageFileType.setImageResource(R.drawable.ic_docx)
+            fileName = "Docx"
+            drawable = R.drawable.ic_docx
         } else if (ext.contains("mp4")) {
-            holder.tvFileTextView?.setText("Video File Attached")
-            holder.imageFileType.setImageResource(R.drawable.ic_play)
+            fileName = "Video"
+            drawable = R.drawable.ic_play
         } else if (ext.contains("jpg")) {
-            holder.tvFileTextView?.setText("Image File Attached")
-            holder.imageFileType.setImageResource(R.drawable.ic_gallery)
+            fileName = "Image"
+            drawable = R.drawable.ic_gallery
         } else if (ext.contains("mp3")) {
-            holder.tvFileTextView?.setText("Audio File Attached")
-            holder.imageFileType.setImageResource(R.drawable.ic_audio)
-        } else {
-            holder.tvFileTextView?.setText("File Attached")
-            holder.imageFileType.setImageResource(R.drawable.ic_file)
+            fileName = "Audio"
+            drawable = R.drawable.ic_audio
         }
+
+        holder.tvFileTextView?.setText(fileName + " File Attached")
+        holder.imageFileType.setImageResource(drawable)
     }
 
     override fun getItemCount(): Int {

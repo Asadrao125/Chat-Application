@@ -31,8 +31,7 @@ class UserAdapter(var context: Home, var list: ArrayList<UserModel>, var usernam
         parent: ViewGroup,
         viewType: Int
     ): MyViewHolder {
-        val view: View =
-            LayoutInflater.from(context).inflate(R.layout.item_user, parent, false)
+        val view: View = LayoutInflater.from(context).inflate(R.layout.item_user, parent, false)
         return MyViewHolder(view)
     }
 
@@ -43,7 +42,6 @@ class UserAdapter(var context: Home, var list: ArrayList<UserModel>, var usernam
         holder.tvUserName.text = userModel.name
 
         holder.profilePic.setOnClickListener {
-
             val intent = Intent(context, ViewImage::class.java)
             intent.putExtra("imageUrl", userModel.profilePic)
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)

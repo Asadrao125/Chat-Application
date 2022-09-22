@@ -11,6 +11,7 @@ import android.widget.RemoteViews
 import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
 import com.asad.chatapplication.R
+import com.asad.chatapplication.activities.Chat
 import com.asad.chatapplication.activities.Home
 import com.bumptech.glide.Glide
 import com.google.firebase.messaging.FirebaseMessagingService
@@ -19,6 +20,15 @@ import java.util.*
 
 class MyFirebaseMessagingService : FirebaseMessagingService() {
     var params: Map<String, String>? = null
+    var title: String = ""
+    var body: String = ""
+    var senderId: String = ""
+    var recieverId: String = ""
+    var profilePicUrl: String = ""
+    var messageType: String = ""
+    var fileUrl: String = ""
+    var recieverName: String = ""
+    var token: String = ""
 
     override fun onMessageReceived(remoteMessage: RemoteMessage) {
         super.onMessageReceived(remoteMessage)
@@ -26,27 +36,29 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         params = remoteMessage.data
 
         if (params!!.size != 0) {
-            val title = params!!.get("title")
-            val body = params!!.get("body")
-            val senderId = params!!.get("senderId")
-            val recieverId = params!!.get("recieverId")
-            val profilePicUrl = params!!.get("profilePicUrl")
-            val messageType = params!!.get("messageType")
-            val fileUrl = params!!.get("fileUrl")
+            title = params!!.get("title")!!
+            body = params!!.get("body")!!
+            senderId = params!!.get("senderId")!!
+            recieverId = params!!.get("recieverId")!!
+            profilePicUrl = params!!.get("profilePicUrl")!!
+            messageType = params!!.get("messageType")!!
+            recieverName = params!!.get("recieverName")!!
+            token = params!!.get("token")!!
 
             if (messageType.equals("1")) {
-                showNotificationSimple(title!!, body!!, profilePicUrl!!)
+                showNotificationSimple(title, body, profilePicUrl)
             } else if (messageType.equals("2")) {
                 val imageUrl = params!!.get("imageUrl")
-                showNotificationWithAttachment(title!!, body!!, profilePicUrl!!, imageUrl!!)
+                showNotificationWithAttachment(title, body, profilePicUrl, imageUrl!!)
             } else if (messageType.equals("3")) {
-                if (fileUrl!!.contains("jpg") || fileUrl.contains("png")
-                    || fileUrl.contains("jpeg")
-                ) {
-                    showNotificationWithAttachment(title!!, body!!, profilePicUrl!!, fileUrl)
+                fileUrl = params!!.get("fileUrl")!!
+                if (fileUrl.contains("jpg") || fileUrl.contains("png") || fileUrl.contains("jpeg")) {
+                    showNotificationWithAttachment(title, body, profilePicUrl, fileUrl)
                 } else {
-                    showNotificationSimple(title!!, body!!, profilePicUrl!!)
+                    showNotificationSimple(title, body, profilePicUrl)
                 }
+            } else if (messageType.equals("4")) {
+                showNotificationSimple(title, body, profilePicUrl)
             }
         }
     }
@@ -60,7 +72,15 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         collapsedView.setTextViewText(R.id.tvCollapsedTitle, title)
         collapsedView.setTextViewText(R.id.tvCollapsedMessage, body)
 
-        val clickIntent = Intent(this, Home::class.java)
+        val clickIntent = Intent(this, Chat::class.java)
+        clickIntent.putExtra("senderId", senderId)
+        clickIntent.putExtra("recieverId", recieverId)
+        clickIntent.putExtra("username", recieverName)
+        clickIntent.putExtra("fcmToken", token)
+        clickIntent.putExtra("senderName", title)
+        clickIntent.putExtra("profilePic", profilePicUrl)
+        clickIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+
         val clickPendingIntent = PendingIntent.getActivity(this, 0, clickIntent, 0)
 
         collapsedView.setImageViewBitmap(
@@ -91,7 +111,6 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
                 .setStyle(NotificationCompat.DecoratedCustomViewStyle())
                 .setContentIntent(clickPendingIntent)
                 .setAutoCancel(true)
-                .setNumber(3)
 
         if (Build.VERSION_CODES.O <= Build.VERSION.SDK_INT) {
             builder.setChannelId(createNotificationChannel())
@@ -111,7 +130,15 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
             R.id.imgProfileCollapsed,
             R.drawable.ic_launcher_background
         )
-        val clickIntent = Intent(this, Home::class.java)
+        val clickIntent = Intent(this, Chat::class.java)
+        clickIntent.putExtra("senderId", senderId)
+        clickIntent.putExtra("recieverId", recieverId)
+        clickIntent.putExtra("username", recieverName)
+        clickIntent.putExtra("fcmToken", token)
+        clickIntent.putExtra("senderName", title)
+        clickIntent.putExtra("profilePic", profilePicUrl)
+        clickIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+
         val clickPendingIntent = PendingIntent.getActivity(this, 0, clickIntent, 0)
 
         collapsedView.setImageViewBitmap(
@@ -127,7 +154,6 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
                 .setStyle(NotificationCompat.DecoratedCustomViewStyle())
                 .setContentIntent(clickPendingIntent)
                 .setAutoCancel(true)
-                .setNumber(5)
 
         if (Build.VERSION_CODES.O <= Build.VERSION.SDK_INT) {
             builder.setChannelId(createNotificationChannel())
