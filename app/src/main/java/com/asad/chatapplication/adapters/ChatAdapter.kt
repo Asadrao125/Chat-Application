@@ -26,6 +26,7 @@ import com.squareup.picasso.Picasso
 
 class ChatAdapter(
     var context: Chat,
+    var list: ArrayList<ChatModel>,
     var username: String,
     var profilePicUrl: String
 ) :
@@ -34,7 +35,6 @@ class ChatAdapter(
     val MSG_TYPE_RIGHT: Int = 1
     var fuser: FirebaseUser? = null
     var selectedPosition = -1
-    var list: ArrayList<ChatModel> = ArrayList()
 
     override fun onCreateViewHolder(@NonNull parent: ViewGroup, viewType: Int): MyViewHolder {
         val view: View?
@@ -52,6 +52,7 @@ class ChatAdapter(
         holder.tvMessage.text = chatModel.message
         holder.tvName.text = username
         holder.tvTime.text = chatModel.time
+        Picasso.get().load(profilePicUrl).placeholder(R.drawable.ic_gallery).into(holder.imgProfile)
 
         if (selectedPosition == position) {
             holder.imageVoiceType.setImageResource(R.drawable.ic_stop)
@@ -73,9 +74,7 @@ class ChatAdapter(
             holder.voiceLayout!!.visibility = View.VISIBLE
         }
 
-        Picasso.get().load(profilePicUrl).placeholder(R.drawable.ic_gallery).into(holder.imgProfile)
-
-        if (chatModel.message.isEmpty()) {
+        if (!chatModel.fileUrl.isEmpty() || !chatModel.imageUrl.isEmpty() || !chatModel.voiceMessage.isEmpty()) {
             holder.tvMessage.visibility = View.GONE
         } else {
             holder.tvMessage.visibility = View.VISIBLE
@@ -151,13 +150,26 @@ class ChatAdapter(
                     val uri: Uri = Uri.parse(chatModel.fileUrl)
                     OpenFile(chatModel.fileUrl, uri, context)
                 }
+            } else if (!chatModel.voiceMessage.isEmpty()) {
+                val player = MediaPlayer()
+
+                if (player.isPlaying) {
+                    player.stop()
+                    player.release()
+                } else {
+                    player.setDataSource(chatModel.voiceMessage)
+                    player.prepare()
+                    player.start()
+                }
+
+                holder.imageVoiceType.setImageResource(R.drawable.ic_stop)
+
+                player.setOnCompletionListener {
+                    player.release()
+                    holder.imageVoiceType.setImageResource(R.drawable.ic_play)
+                }
             }
         }
-    }
-
-    public fun setData(chatList: ArrayList<ChatModel>) {
-        list = chatList;
-        notifyDataSetChanged()
     }
 
     private fun setFileText(fileUrl: String, holder: MyViewHolder) {

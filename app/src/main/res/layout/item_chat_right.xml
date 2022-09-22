@@ -92,6 +92,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="200dp"
                         android:layout_gravity="center"
+                        android:layout_marginLeft="2dp"
+                        android:layout_marginTop="2dp"
+                        android:layout_marginRight="2dp"
                         app:cardCornerRadius="10dp">
 
                         <ImageView
@@ -110,6 +113,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_marginLeft="2dp"
+                        android:layout_marginTop="2dp"
                         android:layout_marginRight="2dp"
                         android:background="@drawable/chatbg"
                         android:orientation="horizontal"
@@ -139,6 +143,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_marginLeft="2dp"
+                        android:layout_marginTop="2dp"
                         android:layout_marginRight="2dp"
                         android:background="@drawable/chatbg"
                         android:orientation="horizontal"
