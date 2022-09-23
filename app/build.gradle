@@ -77,4 +77,6 @@ dependencies {
     annotationProcessor 'com.github.bumptech.glide:compiler:4.13.2'
     // Runtime permissions
     implementation 'com.karumi:dexter:6.2.3'
+    // Record View
+    implementation 'com.github.3llomi:RecordView:3.1.1'
 }

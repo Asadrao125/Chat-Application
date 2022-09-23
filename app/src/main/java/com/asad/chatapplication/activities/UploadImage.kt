@@ -1,17 +1,21 @@
 package com.asad.chatapplication.activities
 
 import android.content.Intent
-import android.database.Cursor
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
+import android.util.Log
+import android.view.View
 import android.widget.Button
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.asad.chatapplication.R
 import com.asad.chatapplication.adapters.ImageAdapter
-import com.asad.chatapplication.utils.StaticFunctions
+import com.devlomi.record_view.OnRecordListener
+import com.devlomi.record_view.RecordButton
+import com.devlomi.record_view.RecordView
 
 class UploadImage : AppCompatActivity() {
     var selectedFilesList: ArrayList<Uri> = ArrayList()
@@ -36,6 +40,7 @@ class UploadImage : AppCompatActivity() {
             intent.action = Intent.ACTION_GET_CONTENT
             startActivityForResult(intent, 11)
         }
+
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
