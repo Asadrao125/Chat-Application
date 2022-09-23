@@ -16,7 +16,6 @@ import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
 
-
 class StaticFunctions {
     companion object {
         fun OpenFile(url: String, uri: Uri, context: Context) {
@@ -119,6 +118,5 @@ class StaticFunctions {
             return activeNetworkInfo != null &&
                     activeNetworkInfo.isConnectedOrConnecting
         }
-
     }
 }
