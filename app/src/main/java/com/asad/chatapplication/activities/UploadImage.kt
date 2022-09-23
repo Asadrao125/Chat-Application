@@ -4,18 +4,12 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
-import android.util.Log
-import android.view.View
 import android.widget.Button
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.asad.chatapplication.R
 import com.asad.chatapplication.adapters.ImageAdapter
-import com.devlomi.record_view.OnRecordListener
-import com.devlomi.record_view.RecordButton
-import com.devlomi.record_view.RecordView
 
 class UploadImage : AppCompatActivity() {
     var selectedFilesList: ArrayList<Uri> = ArrayList()
@@ -40,7 +34,6 @@ class UploadImage : AppCompatActivity() {
             intent.action = Intent.ACTION_GET_CONTENT
             startActivityForResult(intent, 11)
         }
-
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -66,21 +59,5 @@ class UploadImage : AppCompatActivity() {
 
             recyclerView?.adapter = ImageAdapter(applicationContext, selectedFilesList)
         }
-    }
-
-    fun getRealPathFromURI(uri: Uri?): String? {
-        var cursor = contentResolver.query(uri!!, null, null, null, null)
-        cursor!!.moveToFirst()
-        var document_id = cursor.getString(0)
-        document_id = document_id.substring(document_id.lastIndexOf(":") + 1)
-        cursor.close()
-        cursor = contentResolver.query(
-            MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
-            null, MediaStore.Images.Media._ID + " = ? ", arrayOf(document_id), null
-        )
-        cursor!!.moveToFirst()
-        val path = cursor.getString(cursor.getColumnIndex(MediaStore.Images.Media.DATA))
-        cursor.close()
-        return path
     }
 }
