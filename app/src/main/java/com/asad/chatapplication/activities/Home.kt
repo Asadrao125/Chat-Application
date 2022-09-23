@@ -18,7 +18,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.asad.chatapplication.R
 import com.asad.chatapplication.adapters.UserAdapter
-import com.asad.chatapplication.adapters.UserSimpleAdapter
 import com.asad.chatapplication.models.UserModel
 import com.asad.chatapplication.utils.DialogCustomProgress
 import com.asad.chatapplication.utils.StaticFunctions
@@ -31,7 +30,6 @@ import com.squareup.picasso.Picasso
 class Home : AppCompatActivity() {
     var recyclerViewUsers: RecyclerView? = null
     var adapter: UserAdapter? = null
-    var adapterUserSimple: UserSimpleAdapter? = null
     var profilePic: ImageView? = null
     var list: ArrayList<UserModel>? = null
     var mAuth: FirebaseAuth? = null
@@ -66,9 +64,7 @@ class Home : AppCompatActivity() {
                 intent.putExtra("imageUrl", profileUrl)
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                 val transition = Pair.create<View?, String?>(profilePic, "transition")
-                val options = ActivityOptionsCompat.makeSceneTransitionAnimation(
-                    this@Home, transition
-                )
+                val options = ActivityOptionsCompat.makeSceneTransitionAnimation(this@Home, transition)
                 startActivity(intent, options.toBundle())
             }
         }
@@ -100,36 +96,6 @@ class Home : AppCompatActivity() {
             } else {
                 StaticFunctions.ShowToast(applicationContext, task.exception?.localizedMessage!!)
             }
-        })
-    }
-
-    private fun getAllUsers() {
-        list!!.clear()
-        customProgressDialog?.show()
-        val firebaseUser = FirebaseAuth.getInstance().currentUser
-        val reference = FirebaseDatabase.getInstance().getReference("Users")
-        reference.addValueEventListener(object : ValueEventListener {
-            override fun onDataChange(@NonNull dataSnapshot: DataSnapshot) {
-                list!!.clear()
-                customProgressDialog?.dismiss()
-                for (snapshot in dataSnapshot.children) {
-                    val user: UserModel = snapshot.getValue(UserModel::class.java)!!
-                    list!!.add(user)
-                    if (user.id.equals(firebaseUser!!.uid)) {
-                        profileUrl = user.profilePic
-                        senderId = firebaseUser.uid
-                        recieverId = user.id
-                        userName = user.name
-                        tvName?.text = user.name
-                        Picasso.get().load(profileUrl).placeholder(R.drawable.ic_user)
-                            .into(profilePic)
-                    }
-                }
-                adapterUserSimple = UserSimpleAdapter(this@Home, list!!, userName)
-                recyclerViewUsers?.setAdapter(adapterUserSimple)
-            }
-
-            override fun onCancelled(@NonNull databaseError: DatabaseError) {}
         })
     }
 
