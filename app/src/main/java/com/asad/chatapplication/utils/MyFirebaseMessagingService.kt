@@ -13,6 +13,7 @@ import androidx.core.app.NotificationCompat
 import com.asad.chatapplication.R
 import com.asad.chatapplication.activities.Chat
 import com.asad.chatapplication.activities.Home
+import com.asad.chatapplication.activities.Login
 import com.bumptech.glide.Glide
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
@@ -72,7 +73,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         collapsedView.setTextViewText(R.id.tvCollapsedTitle, senderName)
         collapsedView.setTextViewText(R.id.tvCollapsedMessage, body)
 
-        val clickIntent = Intent(this, Home::class.java)
+        val clickIntent = Intent(this, Login::class.java)
         clickIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
 
         val clickPendingIntent = PendingIntent.getActivity(this, 0, clickIntent, 0)
@@ -121,7 +122,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         collapsedView.setTextViewText(R.id.tvCollapsedTitle, senderName)
         collapsedView.setTextViewText(R.id.tvCollapsedMessage, body)
 
-        val clickIntent = Intent(this, Home::class.java)
+        val clickIntent = Intent(this, Login::class.java)
         clickIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
 
         val clickPendingIntent = PendingIntent.getActivity(this, 0, clickIntent, 0)

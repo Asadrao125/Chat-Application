@@ -34,8 +34,8 @@ class Register : AppCompatActivity() {
     var etAboutInfo: MaterialEditText? = null
     var etPassword: MaterialEditText? = null
     var btnRegister: Button? = null
-    var btnUploadProfilePic: TextView? = null
     var imgProfile: ImageView? = null
+    var imgAddImage: ImageView? = null
     var auth: FirebaseAuth? = null
     var rootRef: DatabaseReference? = null
     var userRef: DatabaseReference? = null
@@ -60,8 +60,8 @@ class Register : AppCompatActivity() {
         etEmail = findViewById(R.id.etEmail)
         etPassword = findViewById(R.id.etPassword)
         btnRegister = findViewById(R.id.btnRegister)
-        btnUploadProfilePic = findViewById(R.id.btnUploadProfilePic)
         imgProfile = findViewById(R.id.imgProfile)
+        imgAddImage = findViewById(R.id.imgAddImage)
         auth = FirebaseAuth.getInstance()
         rootRef = FirebaseDatabase.getInstance().getReference()
 
@@ -87,7 +87,7 @@ class Register : AppCompatActivity() {
             }
         })
 
-        btnUploadProfilePic?.setOnClickListener(View.OnClickListener {
+        imgAddImage?.setOnClickListener(View.OnClickListener {
             val intent = Intent()
             intent.type = "image/*"
             intent.action = Intent.ACTION_GET_CONTENT

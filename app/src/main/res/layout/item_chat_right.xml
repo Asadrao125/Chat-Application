@@ -5,7 +5,6 @@
     android:layout_height="wrap_content"
     android:layout_gravity="end"
     android:gravity="end"
-    android:orientation="horizontal"
     android:paddingTop="10dp">
 
     <de.hdodenhof.circleimageview.CircleImageView
@@ -75,7 +74,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/chat_item_right_bg"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:paddingLeft="2dp"
+                    android:paddingTop="2dp"
+                    android:paddingRight="2dp">
 
                     <TextView
                         android:id="@+id/tvMessage"
@@ -92,9 +94,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="200dp"
                         android:layout_gravity="center"
-                        android:layout_marginLeft="2dp"
-                        android:layout_marginTop="2dp"
-                        android:layout_marginRight="2dp"
                         app:cardCornerRadius="10dp">
 
                         <ImageView
@@ -112,9 +111,6 @@
                         android:layout_width="210dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:layout_marginLeft="2dp"
-                        android:layout_marginTop="2dp"
-                        android:layout_marginRight="2dp"
                         android:background="@drawable/chatbg"
                         android:orientation="horizontal"
                         android:padding="10dp">
@@ -142,9 +138,6 @@
                         android:layout_width="210dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:layout_marginLeft="2dp"
-                        android:layout_marginTop="2dp"
-                        android:layout_marginRight="2dp"
                         android:background="@drawable/chatbg"
                         android:orientation="horizontal"
                         android:padding="10dp">
