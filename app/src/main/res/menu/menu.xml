@@ -13,4 +13,10 @@
         android:iconTint="@color/purple_700"
         android:title="Attach File" />
 
+    <item
+        android:id="@+id/voiceMenu"
+        android:icon="@drawable/ic_mic"
+        android:iconTint="@color/purple_700"
+        android:title="Attach Voice" />
+
 </menu>
