@@ -16,7 +16,7 @@
 <dl>
   <dd><b>=> User Status Online/Offline</b></dd>
 </dl>
-<img src=https://user-images.githubusercontent.com/37478549/190136278-44a17aee-91a1-4a57-8d3a-85a5baefa16d.jpg width="400" height="150" />
+<img src=https://user-images.githubusercontent.com/37478549/192448311-7782609a-9e43-40ab-a5ab-f38e4d1dca5f.jpg width="400" height="150" />
 <dl>
   <dd><b>Custom Notifications, Different for Simple Message, Voice, File and Attachment</b></dd>
   <dd><b>=> Simple Message</b></dd>
