@@ -10,4 +10,6 @@
     <color name="chat_bg_color">#bee5a1</color>
     <color name="gray">#e0e0e0</color>
     <color name="teal_200_light">#663700B3</color>
+    <color name="light_blur">#664CAF50</color>
+    <color name="dark_green">#4CAF50</color>
 </resources>

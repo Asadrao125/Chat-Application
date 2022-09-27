@@ -10,7 +10,6 @@ import androidx.annotation.NonNull
 import androidx.core.app.ActivityOptionsCompat
 import androidx.core.util.Pair
 import com.asad.chatapplication.R
-import com.asad.chatapplication.adapters.UserAdapter
 import com.asad.chatapplication.models.UserModel
 import com.google.firebase.database.*
 import com.squareup.picasso.Picasso
@@ -18,6 +17,7 @@ import de.hdodenhof.circleimageview.CircleImageView
 
 class ViewProfile : AppCompatActivity() {
     var tvName: TextView? = null
+    var tvLastSeen: TextView? = null
     var tvEmail: TextView? = null
     var tvAboutInfo: TextView? = null
     var profilePic: CircleImageView? = null
@@ -34,12 +34,14 @@ class ViewProfile : AppCompatActivity() {
         setTitle("View Profile")
 
         tvName = findViewById(R.id.tvName)
+        tvLastSeen = findViewById(R.id.tvLastSeen)
         tvEmail = findViewById(R.id.tvEmail)
         tvAboutInfo = findViewById(R.id.tvAboutInfo)
         profilePic = findViewById(R.id.profilePic)
         id = intent.getStringExtra("id")
 
         setProfile(id!!)
+        checkUserStatus(id!!)
 
         profilePic?.setOnClickListener {
             if (!profilePicUrl!!.isEmpty()) {
@@ -55,7 +57,26 @@ class ViewProfile : AppCompatActivity() {
                 startActivity(intent, options.toBundle())
             }
         }
+    }
 
+    private fun checkUserStatus(id: String) {
+        val userRef: DatabaseReference =
+            FirebaseDatabase.getInstance().getReference().child("Statuses")
+        userRef.child(id).addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(@NonNull dataSnapshot: DataSnapshot) {
+                val status: String = dataSnapshot.child("status").value.toString()
+                val lastSeen: String = dataSnapshot.child("lastSeen").value.toString()
+                if (!status.isEmpty()) {
+                    if (status.equals("online")) {
+                        tvLastSeen?.setText("Online")
+                    } else {
+                        tvLastSeen?.setText(lastSeen)
+                    }
+                }
+            }
+
+            override fun onCancelled(@NonNull databaseError: DatabaseError) {}
+        })
     }
 
     private fun setProfile(id: String) {
@@ -66,6 +87,7 @@ class ViewProfile : AppCompatActivity() {
                 val user: UserModel = dataSnapshot.getValue(UserModel::class.java)!!
                 tvName?.setText(user.name)
                 tvEmail?.setText(user.email)
+                tvLastSeen?.setText(user.email)
                 tvAboutInfo?.setText(user.aboutInfo)
                 profilePicUrl = user.profilePic
                 Picasso.get().load(user.profilePic).placeholder(R.drawable.ic_user).into(profilePic)

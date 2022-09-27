@@ -10,7 +10,6 @@ import android.net.ConnectivityManager
 import android.net.Uri
 import android.webkit.MimeTypeMap
 import android.widget.Toast
-import androidx.core.content.ContextCompat.getSystemService
 import java.io.File
 import java.text.DateFormat
 import java.text.SimpleDateFormat
@@ -80,6 +79,12 @@ class StaticFunctions {
             val df: DateFormat = SimpleDateFormat("EEE, dd MMM, hh:mm aa")
             val date: String = df.format(Calendar.getInstance().getTime())
             return date
+        }
+
+        fun GetCurrentDate(): String {
+            val c = Calendar.getInstance().time
+            val df = SimpleDateFormat("MMM dd, yyyy", Locale.getDefault())
+            return df.format(c)
         }
 
         fun GetCurrentTime(): String {

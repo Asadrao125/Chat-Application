@@ -27,6 +27,7 @@
             android:layout_centerVertical="true"
             android:layout_marginStart="5dp"
             android:layout_marginEnd="10dp"
+            android:foreground="?selectableItemBackground"
             android:src="@drawable/ic_back_arrow" />
 
         <de.hdodenhof.circleimageview.CircleImageView
@@ -44,6 +45,7 @@
             android:layout_centerVertical="true"
             android:layout_marginStart="5dp"
             android:layout_toEndOf="@id/profilePic"
+            android:foreground="?selectableItemBackground"
             android:orientation="vertical">
 
             <TextView
@@ -112,6 +114,7 @@
                 android:layout_height="40dp"
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
+                android:foreground="?selectableItemBackground"
                 android:padding="10dp"
                 android:src="@drawable/attachment" />
 
@@ -129,6 +132,7 @@
             android:layout_height="35dp"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
+            android:foreground="?selectableItemBackground"
             android:padding="5dp"
             android:src="@drawable/send" />
 

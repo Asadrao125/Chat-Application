@@ -2,20 +2,19 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:foreground="?selectableItemBackground"
     android:orientation="vertical">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingLeft="10dp"
-        android:paddingEnd="10dp"
-        android:paddingRight="10dp"
-        android:paddingBottom="5dp">
+        android:paddingTop="5dp">
 
         <RelativeLayout
             android:id="@+id/profileLayout"
             android:layout_width="50dp"
-            android:layout_height="50dp">
+            android:layout_height="50dp"
+            android:layout_marginStart="10dp">
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/profilePic"

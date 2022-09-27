@@ -26,6 +26,7 @@
                 android:layout_height="40dp"
                 android:layout_marginStart="11dp"
                 android:layout_weight="1"
+                android:foreground="?selectableItemBackground"
                 android:padding="5dp"
                 android:src="@drawable/like" />
 
@@ -35,6 +36,7 @@
                 android:layout_height="40dp"
                 android:layout_marginStart="11dp"
                 android:layout_weight="1"
+                android:foreground="?selectableItemBackground"
                 android:padding="5dp"
                 android:src="@drawable/heart" />
 
@@ -44,6 +46,7 @@
                 android:layout_height="40dp"
                 android:layout_marginStart="11dp"
                 android:layout_weight="1"
+                android:foreground="?selectableItemBackground"
                 android:padding="5dp"
                 android:src="@drawable/happy" />
 
@@ -53,6 +56,7 @@
                 android:layout_height="40dp"
                 android:layout_marginStart="11dp"
                 android:layout_weight="1"
+                android:foreground="?selectableItemBackground"
                 android:padding="5dp"
                 android:src="@drawable/shock" />
 
@@ -62,6 +66,7 @@
                 android:layout_height="40dp"
                 android:layout_marginStart="11dp"
                 android:layout_weight="1"
+                android:foreground="?selectableItemBackground"
                 android:padding="5dp"
                 android:src="@drawable/sad" />
 
@@ -71,6 +76,7 @@
                 android:layout_height="40dp"
                 android:layout_marginStart="11dp"
                 android:layout_weight="1"
+                android:foreground="?selectableItemBackground"
                 android:padding="5dp"
                 android:src="@drawable/angry" />
 

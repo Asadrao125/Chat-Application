@@ -11,5 +11,6 @@ class ChatModel(
     var messageStatus: String = "",
     var messageReaction: String = "",
     var voiceMessage: String = "",
-    var viewType: String = ""
+    var viewType: String = "",
+    var date: String = ""
 )

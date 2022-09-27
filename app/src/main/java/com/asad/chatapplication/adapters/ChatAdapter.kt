@@ -2,7 +2,6 @@ package com.asad.chatapplication.adapters
 
 import android.annotation.SuppressLint
 import android.content.Intent
-import android.media.MediaPlayer
 import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
@@ -52,7 +51,20 @@ class ChatAdapter(
         holder.tvMessage.text = chatModel.message
         holder.tvName.text = username
         holder.tvTime.text = chatModel.time
+        holder.tvDate.setText(chatModel.date)
         Picasso.get().load(profilePicUrl).placeholder(R.drawable.ic_gallery).into(holder.imgProfile)
+
+        if (position > 0) {
+            if (chatModel.date.equals(list.get(position - 1).date)) {
+                holder.tvDate.visibility = View.GONE
+            } else {
+                holder.tvDate.visibility = View.VISIBLE
+            }
+        } else {
+            holder.tvDate.visibility = View.VISIBLE
+        }
+
+        setAll(chatModel, holder)
 
         if (selectedPosition == position) {
             holder.imageVoiceType.setImageResource(R.drawable.ic_stop)
@@ -60,10 +72,35 @@ class ChatAdapter(
             holder.imageVoiceType.setImageResource(R.drawable.ic_play)
         }
 
+        holder.itemView.setOnClickListener {
+            val transition = Pair.create<View?, String?>(holder.imageViewChat, "transition")
+            val options = ActivityOptionsCompat.makeSceneTransitionAnimation(context, transition)
+            if (!chatModel.imageUrl.isEmpty()) {
+                val intent = Intent(context, ViewImage::class.java)
+                intent.putExtra("imageUrl", chatModel.imageUrl)
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                context.startActivity(intent, options.toBundle())
+            } else if (!chatModel.fileUrl.isEmpty()) {
+                val url = chatModel.fileUrl
+                if (url.contains("jpg") || url.contains("png") || url.contains("jpeg")) {
+                    val intent = Intent(context, ViewImage::class.java)
+                    intent.putExtra("imageUrl", chatModel.fileUrl)
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                    context.startActivity(intent, options.toBundle())
+                } else {
+                    val uri: Uri = Uri.parse(chatModel.fileUrl)
+                    OpenFile(chatModel.fileUrl, uri, context)
+                }
+            }
+        }
+    }
+
+    private fun setAll(chatModel: ChatModel, holder: MyViewHolder) {
         if (chatModel.imageUrl.isEmpty()) {
             holder.cv.visibility = View.GONE
         } else {
-            Picasso.get().load(chatModel.imageUrl).placeholder(R.drawable.ic_gallery).into(holder.imageViewChat)
+            Picasso.get().load(chatModel.imageUrl).placeholder(R.drawable.ic_gallery)
+                .into(holder.imageViewChat)
             holder.cv.visibility = View.VISIBLE
         }
 
@@ -121,28 +158,6 @@ class ChatAdapter(
             holder.fileLayout?.visibility = View.GONE
             holder.tvFileTextView?.visibility = View.GONE
         }
-
-        holder.itemView.setOnClickListener {
-            val transition = Pair.create<View?, String?>(holder.imageViewChat, "transition")
-            val options = ActivityOptionsCompat.makeSceneTransitionAnimation(context, transition)
-            if (!chatModel.imageUrl.isEmpty()) {
-                val intent = Intent(context, ViewImage::class.java)
-                intent.putExtra("imageUrl", chatModel.imageUrl)
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                context.startActivity(intent, options.toBundle())
-            } else if (!chatModel.fileUrl.isEmpty()) {
-                val url = chatModel.fileUrl
-                if (url.contains("jpg") || url.contains("png") || url.contains("jpeg")) {
-                    val intent = Intent(context, ViewImage::class.java)
-                    intent.putExtra("imageUrl", chatModel.fileUrl)
-                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                    context.startActivity(intent, options.toBundle())
-                } else {
-                    val uri: Uri = Uri.parse(chatModel.fileUrl)
-                    OpenFile(chatModel.fileUrl, uri, context)
-                }
-            }
-        }
     }
 
     private fun setFileText(ext: String, holder: MyViewHolder) {
@@ -184,10 +199,12 @@ class ChatAdapter(
         var imageFileType: ImageView
         var imageVoiceType: ImageView
         var tvVoiceTextView: TextView
+        var tvDate: TextView
         var cv: CardView
         var imgSeen: ImageView
         var imgProfile: ImageView
         var imgReaction: ImageView
+        var parentLayout: LinearLayout
 
         init {
             tvMessage = itemView.findViewById(R.id.tvMessage)
@@ -204,6 +221,8 @@ class ChatAdapter(
             imgProfile = itemView.findViewById(R.id.imgProfile)
             imgReaction = itemView.findViewById(R.id.imgReaction)
             tvVoiceTextView = itemView.findViewById(R.id.tvVoiceTextView)
+            tvDate = itemView.findViewById(R.id.tvDate)
+            parentLayout = itemView.findViewById(R.id.parentLayout)
         }
     }
 
