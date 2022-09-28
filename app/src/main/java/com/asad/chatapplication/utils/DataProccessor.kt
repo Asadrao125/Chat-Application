@@ -25,9 +25,16 @@ class DataProccessor(var context: Context) {
         editor.apply()
     }
 
+    fun removeValue(key: String?) {
+        val prefs: SharedPreferences = context.getSharedPreferences(PREFS_NAME, 0)
+        val editor = prefs.edit()
+        editor.remove(key)
+        editor.apply()
+    }
+
     fun getInt(key: String?): Int {
         val prefs: SharedPreferences = context.getSharedPreferences(PREFS_NAME, 0)
-        return prefs.getInt(key, 0)
+        return prefs.getInt(key, -1)
     }
 
     fun setStr(key: String?, value: String?) {

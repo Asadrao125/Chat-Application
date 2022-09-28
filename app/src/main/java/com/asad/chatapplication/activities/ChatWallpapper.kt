@@ -1,26 +1,23 @@
 package com.asad.chatapplication.activities
 
-import android.graphics.Point
-import android.media.MediaPlayer
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
+import android.widget.LinearLayout
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.asad.chatapplication.R
 import com.asad.chatapplication.adapters.WallpaperAdapter
-import com.asad.chatapplication.models.ChatModel
 import com.asad.chatapplication.utils.DataProccessor
 import com.asad.chatapplication.utils.RecyclerItemClickListener
 import com.asad.chatapplication.utils.StaticFunctions.Companion.GetWallpapperList
-import com.google.firebase.auth.FirebaseAuth
 
 class ChatWallpapper : AppCompatActivity() {
-    var wallpaperList: ArrayList<Int> = ArrayList()
     var recyclerView: RecyclerView? = null
     var adapter: WallpaperAdapter? = null
     var dataProcessor: DataProccessor? = null
+    var clearImageLayout: LinearLayout? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,6 +29,12 @@ class ChatWallpapper : AppCompatActivity() {
 
         getSupportActionBar()?.setDisplayHomeAsUpEnabled(true)
         getSupportActionBar()?.setDisplayShowHomeEnabled(true)
+
+        clearImageLayout = findViewById(R.id.clearImageLayout)
+        clearImageLayout?.setOnClickListener {
+            dataProcessor!!.removeValue("wallpapper_pos")
+            onBackPressed()
+        }
 
         recyclerView = findViewById(R.id.recyclerView)
         val gridLayoutManager = GridLayoutManager(this, 3)
