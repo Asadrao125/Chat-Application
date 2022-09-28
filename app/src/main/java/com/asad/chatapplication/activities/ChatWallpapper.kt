@@ -23,7 +23,7 @@ class ChatWallpapper : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chat_wallpapper)
 
-        setTitle("Chat Wallpapper")
+        setTitle("Chat Background")
 
         dataProcessor = DataProccessor(this)
 
