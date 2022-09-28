@@ -14,6 +14,10 @@
 </dl>
 <img src=https://user-images.githubusercontent.com/37478549/192286491-2c5fd35d-790f-4878-94cb-1a66231941e1.jpg width="200" height="350" />
 <dl>
+  <dd><b>=> Select Chat Background</b></dd>
+</dl>
+<img src = https://user-images.githubusercontent.com/37478549/192797003-5b719b6f-6acb-4aca-95ed-400ae98496b6.jpg width="200" height="350" />
+<dl>
   <dd><b>=> User Status Online/Offline</b></dd>
 </dl>
 <img src=https://user-images.githubusercontent.com/37478549/192448311-7782609a-9e43-40ab-a5ab-f38e4d1dca5f.jpg width="200" height="200" />
