@@ -176,6 +176,8 @@ class ChatAdapter(
         } else if (ext.contains("mp3")) {
             fileName = "Audio"
             drawable = R.drawable.ic_audio
+        } else {
+            fileName = ""
         }
         holder.tvFileTextView?.setText(fileName + " File")
         holder.imageFileType.setImageResource(drawable)
