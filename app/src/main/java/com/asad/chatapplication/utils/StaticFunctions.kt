@@ -6,14 +6,24 @@ import android.content.Context
 import android.content.Context.CONNECTIVITY_SERVICE
 import android.content.Intent
 import android.graphics.*
+import android.media.MediaPlayer
 import android.net.ConnectivityManager
 import android.net.Uri
+import android.util.Log
 import android.webkit.MimeTypeMap
 import android.widget.Toast
+import com.loopj.android.http.AsyncHttpClient
+import com.loopj.android.http.AsyncHttpResponseHandler
+import cz.msebera.android.httpclient.Header
+import cz.msebera.android.httpclient.entity.StringEntity
+import org.json.JSONException
+import org.json.JSONObject
 import java.io.File
+import java.io.UnsupportedEncodingException
 import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
+
 
 class StaticFunctions {
     companion object {
@@ -122,6 +132,120 @@ class StaticFunctions {
                 (context.getSystemService(CONNECTIVITY_SERVICE) as ConnectivityManager?)!!.activeNetworkInfo
             return activeNetworkInfo != null &&
                     activeNetworkInfo.isConnectedOrConnecting
+        }
+
+        fun ApiCallForNotification(
+            message: String,
+            messageType: Int,
+            imageUrl: String,
+            fileUrl: String,
+            senderId: String,
+            recieverId: String,
+            fcmToken: String,
+            senderProfilePic: String,
+            recieverProfilePic: String,
+            senderName: String,
+            recieverName: String,
+            context: Context,
+        ) {
+            val jsonObject = JSONObject()
+            val notificationObj = JSONObject()
+            val dataObj = JSONObject()
+
+            try {
+                jsonObject.put("to", fcmToken)
+
+                dataObj.put("senderId", senderId)
+                dataObj.put("recieverId", recieverId)
+                dataObj.put("senderPic", senderProfilePic)
+                dataObj.put("recieverPic", recieverProfilePic)
+                dataObj.put("messageType", messageType)
+                dataObj.put("senderName", senderName)
+                dataObj.put("recieverName", recieverName)
+                dataObj.put("token", fcmToken)
+
+                if (messageType == 1) {
+                    dataObj.put("body", message)
+                } else if (messageType == 2) {
+                    dataObj.put("body", "Shared an attachment")
+                    dataObj.put("imageUrl", imageUrl)
+                } else if (messageType == 3) {
+                    if (fileUrl.contains("jpg") || fileUrl.contains("png")
+                        || fileUrl.contains("jpeg")
+                    ) {
+                        dataObj.put("body", "Shared an attachment")
+                    } else {
+                        dataObj.put("body", "Shared a file")
+                    }
+                    dataObj.put("fileUrl", fileUrl)
+                } else if (messageType == 4) {
+                    dataObj.put("body", "Shared a voice")
+                }
+
+                jsonObject.put("notification", notificationObj)
+                jsonObject.put("data", dataObj)
+
+                Log.d("dataObj", "apiCallForNotification: " + dataObj)
+
+            } catch (e: JSONException) {
+                e.printStackTrace()
+            }
+
+            val client = AsyncHttpClient()
+            client.setTimeout(10000)
+            client.addHeader("Content-Type", "application/json");
+            client.addHeader(
+                "Authorization",
+                "key=AAAAm8_kL2g:APA91bEeBGFJooUZ1sG04Ti-kDEIe-kYWQ4iJEXWv2GWTSm8L7KWbgvN0dF5ya3g43I_U-oIkd9LeGb7Oj9IOXVXtAZBnssB3GgET4bkm6aXWEovofdD0jYLd6a633kP95lEOhzb0QEK"
+            )
+            try {
+                val entity = StringEntity(jsonObject.toString())
+                client.post(
+                    context,
+                    "https://fcm.googleapis.com/fcm/send",
+                    entity,
+                    "application/json",
+                    object : AsyncHttpResponseHandler() {
+                        override fun onSuccess(
+                            statusCode: Int,
+                            headers: Array<Header?>?,
+                            responseBody: ByteArray?
+                        ) {
+                            val content = String(responseBody!!)
+                            Log.d("onSuccess", "Success: $content")
+                        }
+
+                        override fun onFailure(
+                            statusCode: Int,
+                            headers: Array<Header?>?,
+                            responseBody: ByteArray?,
+                            error: Throwable?
+                        ) {
+                            val content = String(responseBody!!)
+                            Log.d("onFailure", "Failure: $content")
+                        }
+                    })
+            } catch (e: UnsupportedEncodingException) {
+                e.printStackTrace()
+            }
+        }
+
+        fun FormateMilliSeccond(milliseconds: Long): String {
+            var finalTimerString = ""
+            var secondsString = ""
+            val hours = (milliseconds / (1000 * 60 * 60)).toInt()
+            val minutes = (milliseconds % (1000 * 60 * 60)).toInt() / (1000 * 60)
+            val seconds = (milliseconds % (1000 * 60 * 60) % (1000 * 60) / 1000).toInt()
+            if (hours > 0) {
+                finalTimerString = "$hours:"
+            }
+            secondsString = if (seconds < 10) {
+                "0$seconds"
+            } else {
+                "" + seconds
+            }
+            finalTimerString = "$finalTimerString$minutes:$secondsString"
+            return finalTimerString
         }
     }
 }

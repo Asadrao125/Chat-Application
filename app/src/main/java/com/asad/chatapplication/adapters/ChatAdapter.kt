@@ -107,6 +107,7 @@ class ChatAdapter(
         if (chatModel.voiceMessage.isEmpty()) {
             holder.voiceLayout!!.visibility = View.GONE
         } else {
+            holder.tvVoiceTextView.setText(chatModel.duration + " - Voice")
             holder.voiceLayout!!.visibility = View.VISIBLE
         }
 
