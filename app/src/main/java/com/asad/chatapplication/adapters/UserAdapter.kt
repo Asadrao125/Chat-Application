@@ -91,7 +91,6 @@ class UserAdapter(
                     if (chat!!.recieverId.equals(fuser?.uid) && chat.senderId.equals(userId) ||
                         chat.recieverId.equals(userId) && chat.senderId.equals(fuser?.uid)
                     ) {
-                        holder.tvLastMessage.text = chat.message
 
                         if (chat.recieverId.equals(fuser?.uid)) {
                             if (chat.messageStatus.equals("Seen")) {
@@ -105,6 +104,12 @@ class UserAdapter(
                                 holder.tvMessageCount.visibility = View.VISIBLE
                                 holder.tvLastMessage.setTypeface(null, Typeface.BOLD)
                             }
+                        }
+
+                        if (chat.senderId.equals(fuser?.uid)) {
+                            holder.tvLastMessage.text = "YOU: " + chat.message
+                        } else {
+                            holder.tvLastMessage.text = chat.message
                         }
 
                         if (chat.messageStatus.equals("Seen")) {
