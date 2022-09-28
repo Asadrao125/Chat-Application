@@ -131,6 +131,9 @@ class Home : AppCompatActivity() {
         } else if (id == R.id.editProfileMenu) {
             val intent = Intent(this, EditProfile::class.java)
             startActivity(intent)
+        } else if (id == R.id.wallpapperMenu) {
+            val intent = Intent(this, ChatWallpapper::class.java)
+            startActivity(intent)
         }
         return super.onOptionsItemSelected(item)
     }

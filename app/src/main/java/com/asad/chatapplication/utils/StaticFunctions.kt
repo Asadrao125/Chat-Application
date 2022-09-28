@@ -12,6 +12,7 @@ import android.net.Uri
 import android.util.Log
 import android.webkit.MimeTypeMap
 import android.widget.Toast
+import com.asad.chatapplication.R
 import com.loopj.android.http.AsyncHttpClient
 import com.loopj.android.http.AsyncHttpResponseHandler
 import cz.msebera.android.httpclient.Header
@@ -23,6 +24,7 @@ import java.io.UnsupportedEncodingException
 import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.collections.ArrayList
 
 
 class StaticFunctions {
@@ -246,6 +248,23 @@ class StaticFunctions {
             }
             finalTimerString = "$finalTimerString$minutes:$secondsString"
             return finalTimerString
+        }
+
+        fun GetWallpapperList(): ArrayList<Int> {
+            val wallpaperList: ArrayList<Int> = ArrayList()
+            wallpaperList.add(R.drawable.wp1)
+            wallpaperList.add(R.drawable.wp2)
+            wallpaperList.add(R.drawable.wp3)
+            wallpaperList.add(R.drawable.wp4)
+            wallpaperList.add(R.drawable.wp5)
+            wallpaperList.add(R.drawable.wp6)
+            wallpaperList.add(R.drawable.wp7)
+            wallpaperList.add(R.drawable.wp8)
+            wallpaperList.add(R.drawable.wp9)
+            wallpaperList.add(R.drawable.wp10)
+            wallpaperList.add(R.drawable.wp11)
+            wallpaperList.add(R.drawable.wp12)
+            return wallpaperList
         }
     }
 }
