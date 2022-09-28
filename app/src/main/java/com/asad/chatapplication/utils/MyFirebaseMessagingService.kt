@@ -15,6 +15,9 @@ import com.asad.chatapplication.activities.Chat
 import com.asad.chatapplication.activities.Home
 import com.asad.chatapplication.activities.Login
 import com.bumptech.glide.Glide
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.messaging.FirebaseMessaging
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 import java.util.*
@@ -175,5 +178,10 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
 
     override fun onNewToken(token: String) {
         super.onNewToken(token)
+        val firebaseUser = FirebaseAuth.getInstance().currentUser
+        if (firebaseUser != null) {
+            val reference = FirebaseDatabase.getInstance().getReference("Users")
+            reference.child(firebaseUser.uid).child("token").setValue(token)
+        }
     }
 }

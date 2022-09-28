@@ -67,9 +67,9 @@ class EditProfile : AppCompatActivity() {
             val aboutInfo = etAboutInfo?.text.toString().trim()
             if (name.isEmpty()) {
                 StaticFunctions.ShowToast(applicationContext, "Please Enter Name")
-            } /*else if (aboutInfo.isEmpty()) {
+            } else if (aboutInfo.isEmpty()) {
                 StaticFunctions.ShowToast(applicationContext, "Please Enter About Info")
-            }*/ else {
+            } else {
                 updateFirebaseData(name, aboutInfo)
             }
         })

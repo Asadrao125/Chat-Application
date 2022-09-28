@@ -162,7 +162,7 @@ class ChatAdapter(
     }
 
     private fun setFileText(ext: String, holder: MyViewHolder) {
-        var fileName = "File Attached"
+        var fileName = "File"
         var drawable = R.drawable.ic_file
         if (ext.contains("pdf")) {
             fileName = "Pdf"
@@ -172,16 +172,12 @@ class ChatAdapter(
             drawable = R.drawable.ic_docx
         } else if (ext.contains("mp4")) {
             fileName = "Video"
-            drawable = R.drawable.ic_play
-        } else if (ext.contains("jpg")) {
-            fileName = "Image"
-            drawable = R.drawable.ic_gallery
+            drawable = R.drawable.ic_video
         } else if (ext.contains("mp3")) {
             fileName = "Audio"
             drawable = R.drawable.ic_audio
         }
-
-        holder.tvFileTextView?.setText(fileName + " File Attached")
+        holder.tvFileTextView?.setText(fileName + " File")
         holder.imageFileType.setImageResource(drawable)
     }
 

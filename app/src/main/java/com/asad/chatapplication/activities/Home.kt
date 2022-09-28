@@ -56,7 +56,6 @@ class Home : AppCompatActivity() {
         customProgressDialog = DialogCustomProgress(this)
 
         getAllChats()
-        getFirebaseToken()
 
         profilePic?.setOnClickListener {
             if (!profileUrl.isEmpty()) {
@@ -64,40 +63,25 @@ class Home : AppCompatActivity() {
                 intent.putExtra("imageUrl", profileUrl)
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                 val transition = Pair.create<View?, String?>(profilePic, "transition")
-                val options = ActivityOptionsCompat.makeSceneTransitionAnimation(this@Home, transition)
+                val options =
+                    ActivityOptionsCompat.makeSceneTransitionAnimation(this@Home, transition)
                 startActivity(intent, options.toBundle())
             }
         }
     }
 
-    private fun getFirebaseToken() {
+    /*private fun getFirebaseToken() {
         FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
             if (task.isSuccessful) {
                 val token = task.result
                 val firebaseUser = FirebaseAuth.getInstance().currentUser
-                val reference =
-                    FirebaseDatabase.getInstance().getReference("Users").child(firebaseUser!!.uid)
-                reference.addValueEventListener(object : ValueEventListener {
-                    override fun onDataChange(@NonNull dataSnapshot: DataSnapshot) {
-                        val user: UserModel = dataSnapshot.getValue(UserModel::class.java)!!
-                        val hashMap: HashMap<String, String> = HashMap()
-                        hashMap["id"] = user.id
-                        hashMap["name"] = user.name
-                        hashMap["email"] = user.email
-                        hashMap["password"] = user.password
-                        hashMap["token"] = token
-                        hashMap["profilePic"] = user.profilePic
-                        hashMap["aboutInfo"] = user.aboutInfo
-                        reference.setValue(hashMap)
-                    }
-
-                    override fun onCancelled(@NonNull databaseError: DatabaseError) {}
-                })
+                val reference = FirebaseDatabase.getInstance().getReference("Users")
+                reference.child(firebaseUser!!.uid).child("token").setValue(token)
             } else {
                 StaticFunctions.ShowToast(applicationContext, task.exception?.localizedMessage!!)
             }
         })
-    }
+    }*/
 
     private fun getAllChats() {
         list!!.clear()
