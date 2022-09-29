@@ -56,6 +56,7 @@ class Home : AppCompatActivity() {
         customProgressDialog = DialogCustomProgress(this)
 
         getAllChats()
+        getFirebaseToken()
 
         profilePic?.setOnClickListener {
             if (!profileUrl.isEmpty()) {
@@ -70,7 +71,7 @@ class Home : AppCompatActivity() {
         }
     }
 
-    /*private fun getFirebaseToken() {
+    private fun getFirebaseToken() {
         FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
             if (task.isSuccessful) {
                 val token = task.result
@@ -81,7 +82,7 @@ class Home : AppCompatActivity() {
                 StaticFunctions.ShowToast(applicationContext, task.exception?.localizedMessage!!)
             }
         })
-    }*/
+    }
 
     private fun getAllChats() {
         list!!.clear()

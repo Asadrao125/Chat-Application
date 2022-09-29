@@ -1,17 +1,15 @@
 package com.asad.chatapplication.utils
 
-import android.content.ActivityNotFoundException
-import android.content.ContentResolver
-import android.content.Context
+import android.content.*
+import android.content.Context.CLIPBOARD_SERVICE
 import android.content.Context.CONNECTIVITY_SERVICE
-import android.content.Intent
 import android.graphics.*
-import android.media.MediaPlayer
 import android.net.ConnectivityManager
 import android.net.Uri
 import android.util.Log
 import android.webkit.MimeTypeMap
 import android.widget.Toast
+import androidx.core.content.ContextCompat.getSystemService
 import com.asad.chatapplication.R
 import com.loopj.android.http.AsyncHttpClient
 import com.loopj.android.http.AsyncHttpResponseHandler
@@ -99,9 +97,23 @@ class StaticFunctions {
             return df.format(c)
         }
 
+        fun GetYesterdayDate(): String {
+            val dateFormat: DateFormat = SimpleDateFormat("MMM dd, yyyy")
+            val cal = Calendar.getInstance()
+            cal.add(Calendar.DATE, -1)
+            return dateFormat.format(cal.time)
+        }
+
+        fun CopyText(context: Context, textToCopy: String) {
+            val cb: ClipboardManager? =
+                context.getSystemService(CLIPBOARD_SERVICE) as ClipboardManager?
+            val clip = ClipData.newPlainText("label", textToCopy)
+            cb!!.setPrimaryClip(clip)
+            ShowToast(context, "Text Copied")
+        }
+
         fun GetCurrentTime(): String {
-            val time: String = SimpleDateFormat("hh:mm aa", Locale.getDefault()).format(Date())
-            return time
+            return SimpleDateFormat("hh:mm aa", Locale.getDefault()).format(Date())
         }
 
         fun ShowToast(context: Context, msg: String) {

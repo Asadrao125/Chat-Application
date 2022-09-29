@@ -178,10 +178,5 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
 
     override fun onNewToken(token: String) {
         super.onNewToken(token)
-        val firebaseUser = FirebaseAuth.getInstance().currentUser
-        if (firebaseUser != null) {
-            val reference = FirebaseDatabase.getInstance().getReference("Users")
-            reference.child(firebaseUser.uid).child("token").setValue(token)
-        }
     }
 }

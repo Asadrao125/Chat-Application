@@ -24,13 +24,12 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:padding="5dp"
-                android:weightSum="6">
+                android:weightSum="7">
 
                 <ImageView
                     android:id="@+id/imgLike"
                     android:layout_width="0dp"
                     android:layout_height="40dp"
-                    android:layout_marginStart="11dp"
                     android:layout_weight="1"
                     android:foreground="?selectableItemBackground"
                     android:padding="5dp"
@@ -40,7 +39,6 @@
                     android:id="@+id/imgHeart"
                     android:layout_width="0dp"
                     android:layout_height="40dp"
-                    android:layout_marginStart="11dp"
                     android:layout_weight="1"
                     android:foreground="?selectableItemBackground"
                     android:padding="5dp"
@@ -50,7 +48,6 @@
                     android:id="@+id/imgSmile"
                     android:layout_width="0dp"
                     android:layout_height="40dp"
-                    android:layout_marginStart="11dp"
                     android:layout_weight="1"
                     android:foreground="?selectableItemBackground"
                     android:padding="5dp"
@@ -60,7 +57,6 @@
                     android:id="@+id/imgShock"
                     android:layout_width="0dp"
                     android:layout_height="40dp"
-                    android:layout_marginStart="11dp"
                     android:layout_weight="1"
                     android:foreground="?selectableItemBackground"
                     android:padding="5dp"
@@ -70,7 +66,6 @@
                     android:id="@+id/imgSad"
                     android:layout_width="0dp"
                     android:layout_height="40dp"
-                    android:layout_marginStart="11dp"
                     android:layout_weight="1"
                     android:foreground="?selectableItemBackground"
                     android:padding="5dp"
@@ -80,24 +75,91 @@
                     android:id="@+id/imgAngry"
                     android:layout_width="0dp"
                     android:layout_height="40dp"
-                    android:layout_marginStart="11dp"
                     android:layout_weight="1"
                     android:foreground="?selectableItemBackground"
                     android:padding="5dp"
                     android:src="@drawable/angry" />
 
+                <ImageView
+                    android:id="@+id/imgCopy"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_weight="1"
+                    android:foreground="?selectableItemBackground"
+                    android:padding="5dp"
+                    android:src="@drawable/ic_copy" />
+
             </LinearLayout>
 
-            <TextView
-                android:id="@+id/tvDelete"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:id="@+id/layoutForCopyDelete"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:foreground="?selectableItemBackground"
-                android:padding="5dp"
-                android:text="Delete"
-                android:textColor="@android:color/holo_red_dark"
-                android:textSize="16sp" />
+                android:orientation="horizontal"
+                android:visibility="gone"
+                android:weightSum="2">
+
+                <LinearLayout
+                    android:id="@+id/copyLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:foreground="?selectableItemBackground"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:padding="10dp">
+
+                    <ImageView
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:src="@drawable/ic_copy" />
+
+                    <TextView
+                        android:id="@+id/tvCopy"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:text="Copy"
+                        android:textColor="@android:color/holo_green_dark"
+                        android:textSize="16sp" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="1px"
+                    android:layout_height="match_parent"
+                    android:background="@android:color/darker_gray" />
+
+                <LinearLayout
+                    android:id="@+id/deleteLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:padding="10dp">
+
+                    <ImageView
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:src="@drawable/ic_delete" />
+
+                    <TextView
+                        android:id="@+id/tvDelete"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="5dp"
+                        android:gravity="center"
+                        android:text="Delete"
+                        android:textColor="@android:color/holo_red_dark"
+                        android:textSize="16sp" />
+
+                </LinearLayout>
+
+            </LinearLayout>
 
         </LinearLayout>
 

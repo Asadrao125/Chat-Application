@@ -18,6 +18,9 @@ import com.asad.chatapplication.R
 import com.asad.chatapplication.activities.Chat
 import com.asad.chatapplication.activities.ViewImage
 import com.asad.chatapplication.models.ChatModel
+import com.asad.chatapplication.utils.StaticFunctions
+import com.asad.chatapplication.utils.StaticFunctions.Companion.GetCurrentDate
+import com.asad.chatapplication.utils.StaticFunctions.Companion.GetYesterdayDate
 import com.asad.chatapplication.utils.StaticFunctions.Companion.OpenFile
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
@@ -51,8 +54,15 @@ class ChatAdapter(
         holder.tvMessage.text = chatModel.message
         holder.tvName.text = username
         holder.tvTime.text = chatModel.time
-        holder.tvDate.setText(chatModel.date)
         Picasso.get().load(profilePicUrl).placeholder(R.drawable.ic_gallery).into(holder.imgProfile)
+
+        if (chatModel.date.equals(GetCurrentDate())) {
+            holder.tvDate.setText("Today")
+        } else if (chatModel.date.equals(GetYesterdayDate())) {
+            holder.tvDate.setText("Yesterday")
+        } else {
+            holder.tvDate.setText(chatModel.date)
+        }
 
         if (position > 0) {
             if (chatModel.date.equals(list.get(position - 1).date)) {

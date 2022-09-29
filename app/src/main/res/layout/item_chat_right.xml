@@ -18,14 +18,15 @@
 
     <TextView
         android:id="@+id/tvDate"
-        android:layout_width="wrap_content"
+        android:layout_width="110dp"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="10dp"
         android:background="@drawable/chat_date_bg"
+        android:gravity="center"
         android:padding="5dp"
         android:text="Aug 01, 2022"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         android:visibility="gone" />
 
     <LinearLayout
