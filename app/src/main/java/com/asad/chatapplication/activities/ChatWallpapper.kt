@@ -1,5 +1,6 @@
 package com.asad.chatapplication.activities
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
@@ -43,9 +44,7 @@ class ChatWallpapper : AppCompatActivity() {
             onBackPressed()
         }
 
-        if (dataProcessor?.getStr("Theme").equals("Dark")) {
-            switchButton?.isChecked = true
-        } else if (dataProcessor?.getStr("Theme").equals("Light")) {
+        if (dataProcessor?.getStr("Theme").equals("Light")) {
             switchButton?.isChecked = false
         } else {
             switchButton?.isChecked = true
@@ -55,9 +54,11 @@ class ChatWallpapper : AppCompatActivity() {
             if (isChecked) {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
                 dataProcessor?.setStr("Theme", "Dark")
+                recreate()
             } else {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
                 dataProcessor?.setStr("Theme", "Light")
+                recreate()
             }
         })
 

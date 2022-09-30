@@ -102,29 +102,28 @@
     <RelativeLayout
         android:id="@+id/mainLayout"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_margin="5dp"
-        android:background="@drawable/chatbg">
+        android:layout_margin="5dp">
 
         <RelativeLayout
             android:id="@+id/messageLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_toStartOf="@id/imgSend">
+            android:layout_toStartOf="@id/imgSend"
+            android:background="@drawable/chatbg">
 
             <EditText
                 android:id="@+id/etMessage"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_toStartOf="@id/imgAttachment"
                 android:background="@null"
                 android:hint="Enter Message"
-                android:inputType="text"
                 android:maxLines="3"
                 android:minLines="1"
                 android:padding="10dp" />
@@ -138,12 +137,6 @@
                 android:foreground="?selectableItemBackground"
                 android:padding="10dp"
                 android:src="@drawable/attachment" />
-
-            <View
-                android:layout_width="1px"
-                android:layout_height="match_parent"
-                android:layout_alignParentEnd="true"
-                android:background="@android:color/darker_gray" />
 
         </RelativeLayout>
 
