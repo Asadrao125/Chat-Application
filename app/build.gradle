@@ -12,7 +12,7 @@ android {
 
     defaultConfig {
         applicationId "com.asad.chatapplication"
-        minSdkVersion 19
+        minSdkVersion 21
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
@@ -71,4 +71,6 @@ dependencies {
     implementation 'com.karumi:dexter:6.2.3'
     // Record View
     implementation 'com.github.3llomi:RecordView:3.1.1'
+    //
+    implementation 'com.github.shts:StoriesProgressView:3.0.0'
 }

@@ -170,7 +170,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         val bitmap: Bitmap = Glide.with(applicationContext)
             .asBitmap()
             .load(imageUrl)
-            .error(R.drawable.ic_user)
+            /*.error(R.drawable.ic_user)*/
             .submit(512, 512)
             .get()
         return StaticFunctions.GetRoundedCornerBitmap(bitmap)

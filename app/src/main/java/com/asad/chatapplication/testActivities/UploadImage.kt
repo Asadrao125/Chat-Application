@@ -1,9 +1,8 @@
-package com.asad.chatapplication.activities
+package com.asad.chatapplication.testActivities
 
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.provider.MediaStore
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager

@@ -31,7 +31,7 @@ class WallpaperAdapter(var context: Context, var list: ArrayList<Int>) :
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val path = list.get(position)
-        Glide.with(context).load(path).placeholder(R.drawable.ic_launcher_background)
+        Glide.with(context).load(path)/*.placeholder(R.drawable.ic_launcher_background)*/
             .into(holder.selectedImage)
 
         if (selectedPosition == position) {

@@ -4,19 +4,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".testActivities.UploadImage">
+    tools:context=".testActivities.StoryTestActivity">
 
     <Button
-        android:id="@+id/btn"
+        android:id="@+id/btnSelectImage"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
-        android:text="Select Multiple Images" />
+        android:text="Select Status Image" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
+        android:id="@+id/storyRv"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:listitem="@layout/item_image" />
+        android:layout_height="wrap_content"
+        tools:listitem="@layout/item_story" />
 
 </LinearLayout>

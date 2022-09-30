@@ -18,12 +18,15 @@
         android:roundIcon="@drawable/app_icon"
         android:supportsRtl="true"
         android:theme="@style/Theme.ChatApplication">
+        <activity
+            android:name=".testActivities.StoryTestActivity"
+            android:exported="true" />
         <activity android:name=".activities.ChatWallpapper" />
         <activity android:name=".activities.ViewProfile" />
         <activity android:name=".activities.EditProfile" />
         <activity android:name=".activities.ViewImage" />
         <activity
-            android:name=".activities.UploadImage"
+            android:name=".testActivities.UploadImage"
             android:exported="true" />
         <activity android:name=".activities.Chat" />
         <activity android:name=".activities.Register" />
@@ -31,13 +34,11 @@
         <activity
             android:name=".activities.Splash"
             android:exported="true">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
         <activity android:name=".activities.Home" />
 
