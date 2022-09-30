@@ -1,6 +1,5 @@
 package com.asad.chatapplication.activities
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
@@ -16,7 +15,6 @@ import com.asad.chatapplication.adapters.WallpaperAdapter
 import com.asad.chatapplication.utils.DataProccessor
 import com.asad.chatapplication.utils.RecyclerItemClickListener
 import com.asad.chatapplication.utils.StaticFunctions.Companion.GetWallpapperList
-
 
 class ChatWallpapper : AppCompatActivity() {
     var recyclerView: RecyclerView? = null
