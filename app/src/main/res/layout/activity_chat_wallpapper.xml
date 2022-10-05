@@ -12,13 +12,14 @@
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:background="@drawable/chatbg"
+        android:foreground="?selectableItemBackground"
         android:gravity="center"
         android:orientation="horizontal"
         android:padding="5dp">
 
         <ImageView
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
             android:src="@drawable/ic_clear_image" />
 
         <TextView
@@ -28,7 +29,7 @@
             android:layout_marginStart="10dp"
             android:text="Clear Chat Background"
             android:textColor="@color/black"
-            android:textSize="18sp" />
+            android:textSize="16sp" />
 
     </LinearLayout>
 
@@ -38,9 +39,10 @@
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:background="@drawable/chatbg"
+        android:foreground="?selectableItemBackground"
         android:gravity="center"
         android:orientation="horizontal"
-        android:padding="5dp">
+        android:padding="3dp">
 
         <TextView
             android:layout_width="wrap_content"
@@ -48,7 +50,7 @@
             android:layout_gravity="center"
             android:text="Change Theme"
             android:textColor="@color/black"
-            android:textSize="18sp" />
+            android:textSize="16sp" />
 
         <Switch
             android:id="@+id/switchButton"
@@ -63,6 +65,7 @@
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        tools:itemCount="2"
         tools:listitem="@layout/item_image" />
 
 </LinearLayout>

@@ -21,7 +21,9 @@ class ChatWallpapper : AppCompatActivity() {
     var adapter: WallpaperAdapter? = null
     var dataProcessor: DataProccessor? = null
     var clearImageLayout: LinearLayout? = null
+    var changeThemeLayout: LinearLayout? = null
     var switchButton: Switch? = null
+    var wallpapper_pos: Int? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,7 +37,9 @@ class ChatWallpapper : AppCompatActivity() {
         getSupportActionBar()?.setDisplayShowHomeEnabled(true)
 
         clearImageLayout = findViewById(R.id.clearImageLayout)
+        changeThemeLayout = findViewById(R.id.changeThemeLayout)
         switchButton = findViewById(R.id.switchButton)
+        wallpapper_pos = dataProcessor!!.getInt("wallpapper_pos")
 
         clearImageLayout?.setOnClickListener {
             dataProcessor!!.removeValue("wallpapper_pos")
@@ -46,6 +50,20 @@ class ChatWallpapper : AppCompatActivity() {
             switchButton?.isChecked = false
         } else {
             switchButton?.isChecked = true
+        }
+
+        changeThemeLayout?.setOnClickListener {
+            if (!switchButton!!.isChecked) {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+                dataProcessor?.setStr("Theme", "Dark")
+                switchButton!!.isChecked = true
+                recreate()
+            } else {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                dataProcessor?.setStr("Theme", "Light")
+                switchButton!!.isChecked = false
+                recreate()
+            }
         }
 
         switchButton?.setOnCheckedChangeListener(CompoundButton.OnCheckedChangeListener { buttonView, isChecked ->
@@ -66,7 +84,10 @@ class ChatWallpapper : AppCompatActivity() {
         recyclerView?.setHasFixedSize(true)
 
         adapter = WallpaperAdapter(this, GetWallpapperList())
-        adapter!!.selectedPosition = dataProcessor!!.getInt("wallpapper_pos")
+        adapter!!.selectedPosition = wallpapper_pos as Int
+        if (wallpapper_pos!! > -1) {
+            recyclerView?.smoothScrollToPosition(wallpapper_pos!!)
+        }
         recyclerView!!.adapter = adapter
 
         recyclerView?.addOnItemTouchListener(
@@ -90,5 +111,4 @@ class ChatWallpapper : AppCompatActivity() {
         }
         return super.onOptionsItemSelected(item)
     }
-
 }

@@ -1,20 +1,18 @@
 package com.asad.chatapplication.adapters
 
+import android.annotation.SuppressLint
 import android.content.Context
-import android.graphics.drawable.Drawable
-import android.net.Uri
-import android.util.Log
+import android.graphics.drawable.ColorDrawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.asad.chatapplication.R
-import com.asad.chatapplication.activities.Home
 import com.bumptech.glide.Glide
-import com.squareup.picasso.Picasso
-import java.io.File
+
 
 class WallpaperAdapter(var context: Context, var list: ArrayList<Int>) :
     RecyclerView.Adapter<WallpaperAdapter.MyViewHolder>() {
@@ -29,15 +27,17 @@ class WallpaperAdapter(var context: Context, var list: ArrayList<Int>) :
         return MyViewHolder(view)
     }
 
+    @SuppressLint("NewApi")
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val path = list.get(position)
-        Glide.with(context).load(path)/*.placeholder(R.drawable.ic_launcher_background)*/
-            .into(holder.selectedImage)
+        Glide.with(context).load(path).into(holder.selectedImage)
 
         if (selectedPosition == position) {
-            holder.parentLayout.setBackgroundResource(R.drawable.wallpapper_selector_border)
+            holder.parentLayout.alpha = 0.6F
+            holder.selectedImage.setForeground(context.getDrawable(R.drawable.wallpapper_selector_border))
         } else {
-            holder.parentLayout.setBackgroundResource(R.drawable.wallpapper_selector_trans)
+            holder.parentLayout.alpha = 1F
+            holder.selectedImage.setForeground(context.getDrawable(R.drawable.wallpapper_selector_trans))
         }
     }
 
